@@ -139,6 +139,7 @@
     min-height: 190px;
     padding: 28px;
     background: var(--paper);
+
     display: flex;
     gap: 24px;
     align-items: flex-start;
@@ -190,6 +191,84 @@
     font-size: 14px;
   }
 
+  .system-license {
+    margin-top: 1px;
+    padding: 18px 24px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .system-license-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+
+  .system-license-note {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: .05em;
+  }
+
+  .system-license .price {
+    font-size: 14px;
+  }
+
+  .license {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+  }
+
+  .license-title {
+    font-size: 14px;
+    letter-spacing: .04em;
+  }
+
+  .license-copy {
+    max-width: 650px;
+    color: #373532;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .license-meta {
+    margin-top: 24px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .license-meta div {
+    padding: 16px;
+    background: var(--paper);
+  }
+
+  .license-meta span {
+    display: block;
+  }
+
+  .meta-label {
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: .08em;
+  }
+
+  .meta-value {
+    font-size: 11px;
+  }
+
   .launch {
     display: flex;
     justify-content: space-between;
@@ -232,6 +311,7 @@
   }
 
   @media (max-width: 700px) {
+
     main {
       width: min(100% - 28px, 1100px);
     }
@@ -263,6 +343,20 @@
 
     .product {
       min-height: 150px;
+    }
+
+    .system-price,
+    .system-license {
+      gap: 20px;
+    }
+
+    .license {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .license-meta {
+      grid-template-columns: 1fr;
     }
 
     .launch {
@@ -336,6 +430,7 @@
         <span class="number">01</span>
 
         <div class="product-content">
+
           <h2>
             MCS-01 CULINOMETRIC
           </h2>
@@ -343,6 +438,7 @@
           <span class="price">
             $39
           </span>
+
         </div>
 
       </article>
@@ -353,6 +449,7 @@
         <span class="number">02</span>
 
         <div class="product-content">
+
           <h2>
             MCS-02 COMPOSITA
           </h2>
@@ -360,6 +457,7 @@
           <span class="price">
             $49
           </span>
+
         </div>
 
       </article>
@@ -376,6 +474,88 @@
       <span class="price">
         $69
       </span>
+
+    </div>
+
+
+    <div class="system-license">
+
+      <div>
+
+        <span class="system-license-label">
+          MCS SYSTEMS LICENSE
+        </span>
+
+        <span class="system-license-note">
+          UNIVERSAL LICENSE / MCS PRODUCT LINE
+        </span>
+
+      </div>
+
+      <span class="price">
+        $149
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-label">
+      <span>license</span>
+      <span>mcs / terms</span>
+    </div>
+
+    <div class="license">
+
+      <div class="license-title">
+        PROPRIETARY SOFTWARE
+      </div>
+
+      <div class="license-copy">
+
+        Morrow Culinary Systems software is distributed under
+        proprietary licensing. Product licenses authorize use of
+        the corresponding MCS software according to the license
+        purchased.
+
+        <div class="license-meta">
+
+          <div>
+            <span class="meta-label">
+              PRODUCT
+            </span>
+
+            <span class="meta-value">
+              INDIVIDUAL
+            </span>
+          </div>
+
+          <div>
+            <span class="meta-label">
+              SYSTEMS
+            </span>
+
+            <span class="meta-value">
+              UNIVERSAL
+            </span>
+          </div>
+
+          <div>
+            <span class="meta-label">
+              STATUS
+            </span>
+
+            <span class="meta-value">
+              PROPRIETARY
+            </span>
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
