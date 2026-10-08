@@ -8,27 +8,30 @@
 
 <meta
   name="description"
-  content="Morrow Culinary Systems is an independent culinary technology studio developing software-assisted methods for food measurement, composition, sensory evaluation, and computational food-system research."
+  content="Morrow Culinary Systems — independent culinary technology and food systems research."
 >
 <meta name="author" content="Axayacatl">
-<meta name="creator" content="Axayacatl">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link
-  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Michroma&display=swap"
   rel="stylesheet"
 >
 
 <style>
+
 :root {
-  --paper: #f4f2ed;
-  --ink: #151515;
-  --muted: #73716c;
-  --line: #c9c6be;
-  --soft: #e8e5de;
-  --red: #a63b2f;
-  --white: #faf9f5;
+  --paper: #eeeae1;
+  --paper-dark: #e3dfd5;
+  --white: #f8f6f0;
+  --ink: #111;
+  --muted: #68655f;
+  --line: #aaa69d;
+  --line-soft: #cbc7bd;
+  --red: #a32920;
+  --red-dark: #781c16;
 }
 
 * {
@@ -41,11 +44,30 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(rgba(17,17,17,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,17,17,.025) 1px, transparent 1px),
+    var(--paper);
+  background-size: 32px 32px;
   color: var(--ink);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.65;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(0,0,0,.014) 4px
+    );
 }
 
 a {
@@ -53,550 +75,1186 @@ a {
 }
 
 .page {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
+  width: min(1240px, calc(100% - 42px));
+  margin: auto;
 }
 
-/* HEADER */
+/* ==================================================
+   TYPOGRAPHY
+================================================== */
+
+.display {
+  font-family: "Michroma", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ==================================================
+   HEADER
+================================================== */
 
 header {
-  min-height: 92px;
+  height: 88px;
   border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
+  position: relative;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 110px;
+  height: 2px;
+  background: var(--red);
 }
 
 .brand {
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: "Michroma", sans-serif;
+  font-size: 14px;
+  letter-spacing: .09em;
 }
 
-.status {
+.header-status {
   color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 9px;
+  letter-spacing: .13em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-/* HERO */
+.status-light {
+  width: 7px;
+  height: 7px;
+  background: var(--red);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% {
+    opacity: .25;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ==================================================
+   HERO
+================================================== */
 
 .hero {
-  padding: 110px 0 120px;
-  max-width: 880px;
+  min-height: 700px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.kicker {
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  left: 71%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--line-soft);
+}
+
+.hero-grid::after {
+  content: "";
+  position: absolute;
+  top: 66%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--line-soft);
+}
+
+/* animated horizontal scanner */
+
+.hero-scan {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  top: -20px;
+  background: var(--red);
+  opacity: .18;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: -20px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/* giant background identifier */
+
+.hero-ghost {
+  position: absolute;
+  right: -25px;
+  top: 40px;
+  font-family: "Michroma", sans-serif;
+  font-size: clamp(150px, 25vw, 330px);
+  color: rgba(17,17,17,.035);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* orbital graphic */
+
+.orbit-system {
+  position: absolute;
+  right: 7%;
+  bottom: 14%;
+  width: 250px;
+  height: 250px;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.orbit:nth-child(2) {
+  inset: 28px;
+}
+
+.orbit:nth-child(3) {
+  inset: 67px;
+  border-color: var(--red);
+  animation: orbitspin 15s linear infinite;
+}
+
+.orbit:nth-child(4) {
+  inset: 105px;
+}
+
+.orbit-cross-x,
+.orbit-cross-y {
+  position: absolute;
+  background: var(--line);
+}
+
+.orbit-cross-x {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+}
+
+.orbit-cross-y {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+}
+
+.orbit-node {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--red);
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-tick {
+  position: absolute;
+  width: 1px;
+  height: 14px;
+  background: var(--ink);
+  left: 50%;
+  top: -7px;
+}
+
+.orbit-label {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  font-size: 7px;
+  letter-spacing: .12em;
+  color: var(--muted);
+  transform: rotate(90deg);
+}
+
+@keyframes orbitspin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 940px;
+}
+
+.hero-index {
   color: var(--red);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  margin-bottom: 24px;
+  font-size: 9px;
+  letter-spacing: .16em;
+  margin-bottom: 28px;
 }
 
-.hero h1 {
+.hero-title {
+  font-family: "Michroma", sans-serif;
+  font-size: clamp(42px, 8vw, 105px);
+  line-height: 1;
+  letter-spacing: -.04em;
   margin: 0;
-  font-size: clamp(42px, 7vw, 86px);
-  line-height: 0.98;
-  font-weight: 500;
-  letter-spacing: -0.06em;
 }
 
-.hero p {
-  max-width: 690px;
-  margin: 38px 0 0;
+.hero-title span {
+  display: block;
+}
+
+.hero-title .cursor {
+  display: inline-block;
+  width: .06em;
+  height: .8em;
+  background: var(--red);
+  margin-left: .08em;
+  animation: blink .8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-subtitle {
+  max-width: 650px;
+  margin-top: 40px;
   color: #4e4c47;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* SECTION */
-
-section {
-  padding: 78px 0;
-  border-top: 1px solid var(--line);
+.hero-coordinates {
+  display: flex;
+  gap: 34px;
+  margin-top: 45px;
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: .08em;
 }
 
-.section-heading {
+.hero-coordinates span {
+  color: var(--ink);
+}
+
+/* telemetry */
+
+.telemetry {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+  width: 150px;
+  font-size: 7px;
+  color: var(--muted);
+  letter-spacing: .08em;
+}
+
+.telemetry-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 30px;
-  margin-bottom: 42px;
+  border-bottom: 1px solid var(--line-soft);
+  padding: 4px 0;
 }
 
-.section-heading h2 {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+.telemetry-value {
+  color: var(--red);
+}
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
+section {
+  border-bottom: 1px solid var(--line);
+  padding: 95px 0;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 30px;
+  margin-bottom: 55px;
 }
 
 .section-number {
-  color: var(--muted);
-  font-size: 11px;
+  font-family: "Michroma", sans-serif;
+  color: var(--red);
+  font-size: 10px;
 }
 
-/* PRODUCTS */
+.section-title {
+  font-family: "Michroma", sans-serif;
+  font-size: 22px;
+  letter-spacing: .07em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.section-description {
+  max-width: 680px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* ==================================================
+   ARCHITECTURE
+================================================== */
+
+.architecture {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+
+.arch-card {
+  min-height: 270px;
+  padding: 30px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.arch-card::after {
+  content: attr(data-index);
+  position: absolute;
+  right: 15px;
+  bottom: -10px;
+  font-family: "Michroma", sans-serif;
+  font-size: 80px;
+  color: rgba(17,17,17,.035);
+}
+
+.arch-code {
+  color: var(--red);
+  font-size: 9px;
+  letter-spacing: .12em;
+}
+
+.arch-card h3 {
+  font-family: "Michroma", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 22px 0;
+}
+
+.arch-card p {
+  max-width: 400px;
+  color: var(--muted);
+}
+
+.arch-flow {
+  position: absolute;
+  left: 30px;
+  bottom: 27px;
+  font-size: 8px;
+  letter-spacing: .1em;
+}
+
+.flow-line {
+  position: relative;
+  height: 2px;
+  width: 150px;
+  background: var(--line-soft);
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.flow-line::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 100%;
+  background: var(--red);
+  left: -25px;
+  animation: flow 2.4s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    left: 100%;
+  }
+}
+
+/* ==================================================
+   PRODUCTS
+================================================== */
 
 .product {
   border-top: 1px solid var(--line);
-  padding: 34px 0 40px;
+  padding: 48px 0;
   display: grid;
-  grid-template-columns: 220px 1fr 130px;
-  gap: 30px;
+  grid-template-columns: 180px 1fr 130px;
+  gap: 35px;
 }
 
-.product:last-child {
+.product:last-of-type {
   border-bottom: 1px solid var(--line);
 }
 
-.product-code {
+.product-index {
   color: var(--red);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 9px;
+}
+
+.product-index strong {
+  display: block;
+  font-family: "Michroma", sans-serif;
+  font-size: 30px;
+  margin-top: 5px;
 }
 
 .product h3 {
-  margin: 0 0 13px;
+  font-family: "Michroma", sans-serif;
   font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  margin: 0 0 20px;
 }
 
-.product p {
-  margin: 0;
+.product-description {
   max-width: 720px;
-  color: #55534e;
+  color: #55524d;
 }
 
-.price {
-  text-align: right;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.product-meta {
-  margin-top: 22px;
+.product-data {
   display: grid;
-  grid-template-columns: repeat(3, minmax(100px, 1fr));
-  gap: 12px;
-  max-width: 620px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+  margin-top: 30px;
+  max-width: 680px;
 }
 
-.meta-item {
-  border-top: 1px solid var(--soft);
-  padding-top: 8px;
+.data-cell {
+  border-top: 1px solid var(--line-soft);
+  padding-top: 9px;
 }
 
-.meta-label {
+.data-cell small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  margin-bottom: 3px;
+  font-size: 8px;
+  letter-spacing: .1em;
+  margin-bottom: 4px;
 }
 
-.meta-value {
-  font-size: 11px;
+.product-price {
+  text-align: right;
+  font-family: "Michroma", sans-serif;
 }
 
-.bundle {
-  margin-top: 32px;
-  padding: 28px;
-  background: var(--ink);
-  color: var(--white);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 25px;
-  align-items: center;
-}
+/* ==================================================
+   LICENSE
+================================================== */
 
-.bundle-code {
-  color: #aaa7a0;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  margin-bottom: 7px;
-}
-
-.bundle h3 {
-  margin: 0;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.bundle p {
-  margin: 8px 0 0;
-  color: #bbb8b1;
-  font-size: 11px;
-}
-
-.bundle-price {
-  font-size: 19px;
-}
-
-.universal-license {
-  margin-top: 12px;
-  padding: 20px 28px;
+.license-row {
+  margin-top: 15px;
+  padding: 25px 30px;
   border: 1px solid var(--line);
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 25px;
   align-items: center;
+  background: rgba(255,255,255,.2);
 }
 
-.universal-license .code {
-  color: var(--red);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+.license-row strong {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
 }
 
-.universal-license strong {
+.license-row small {
   display: block;
-  margin-top: 5px;
-  font-weight: 500;
-}
-
-.universal-license p {
-  margin: 4px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  margin-top: 6px;
 }
 
-.universal-price {
-  font-size: 17px;
+.license-price {
+  font-family: "Michroma", sans-serif;
 }
 
-/* RESEARCH */
+/* ==================================================
+   RESEARCH
+================================================== */
 
 .research-output {
   border-top: 1px solid var(--line);
-  padding: 42px 0 50px;
+  padding: 55px 0 75px;
 }
 
-.research-output:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.output-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+.output-top {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
   gap: 30px;
+  align-items: start;
 }
 
 .output-id {
-  display: block;
   color: var(--red);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  margin-bottom: 9px;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
-.output-header h3 {
-  margin: 0;
+.output-id strong {
+  display: block;
+  font-family: "Michroma", sans-serif;
+  font-size: 23px;
+}
+
+.output-title {
+  font-family: "Michroma", sans-serif;
   font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .output-type {
+  border: 1px solid var(--line);
+  padding: 6px 9px;
   color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
 .output-description {
   max-width: 800px;
-  color: #53514c;
-  margin: 25px 0 32px;
+  margin: 28px 0 38px 180px;
+  color: #514f4a;
 }
 
-.data-rows {
-  border-top: 1px solid var(--soft);
+/* ==================================================
+   DATA
+================================================== */
+
+.data-table {
+  margin-left: 180px;
+  border-top: 1px solid var(--line);
 }
 
 .data-row {
   display: grid;
   grid-template-columns: 190px 1fr;
   gap: 25px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--soft);
-  font-size: 11px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 10px;
 }
 
-.label {
+.data-label {
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.08em;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
-/* EXPERIMENT */
+/* ==================================================
+   TECH BOX
+================================================== */
 
-.experiment {
-  margin: 30px 0;
-  padding: 24px;
-  background: var(--white);
+.technical-box {
+  margin: 38px 0 38px 180px;
   border: 1px solid var(--line);
-  overflow-x: auto;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
 }
 
-.experiment-title {
-  color: var(--red);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  margin-bottom: 18px;
+.technical-box::before {
+  content: "MCS / DATA CHANNEL";
+  display: block;
+  padding: 9px 15px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.technical-box::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  animation: pulse 1.4s infinite;
+}
+
+.technical-content {
+  padding: 27px;
+  overflow-x: auto;
 }
 
 pre {
   margin: 0;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
-  line-height: 1.75;
-  white-space: pre;
+  font-size: 10px;
+  line-height: 1.8;
 }
 
-/* RESULTS */
+/* ==================================================
+   LIVE TYPING GRAPHIC
+================================================== */
 
-.result-grid {
+.typing-panel {
+  margin: 38px 0 38px 180px;
+  border: 1px solid var(--line);
+  background: #141414;
+  color: #d8d5cc;
+  min-height: 175px;
+  position: relative;
+  overflow: hidden;
+}
+
+.typing-panel::before {
+  content: "LIVE RESEARCH CHANNEL";
+  display: block;
+  padding: 9px 15px;
+  border-bottom: 1px solid #373737;
+  color: #77746e;
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.typing-panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--red);
+  opacity: .35;
+  top: 45px;
+  animation: terminalscan 4s linear infinite;
+}
+
+@keyframes terminalscan {
+  0% {
+    top: 45px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+.typing-content {
+  padding: 23px;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+.typing-line {
+  min-height: 19px;
+}
+
+.prompt {
+  color: var(--red);
+}
+
+.type-text {
+  color: #e5e1d8;
+}
+
+.type-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 11px;
+  background: var(--red);
+  vertical-align: -1px;
+  animation: blink .7s steps(1) infinite;
+}
+
+/* ==================================================
+   SYSTEM GRAPHIC
+================================================== */
+
+.system-graphic {
+  margin: 38px 0 38px 180px;
+  border: 1px solid var(--line);
+  min-height: 220px;
+  position: relative;
+  background:
+    linear-gradient(rgba(17,17,17,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,17,17,.035) 1px, transparent 1px);
+  background-size: 22px 22px;
+  overflow: hidden;
+}
+
+.system-graphic::before {
+  content: "SYSTEM FLOW / LIVE";
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.system-track {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 55%;
+  height: 1px;
+  background: var(--line);
+}
+
+.system-packet {
+  position: absolute;
+  top: calc(55% - 3px);
+  left: 8%;
+  width: 7px;
+  height: 7px;
+  background: var(--red);
+  animation: packet 5s linear infinite;
+}
+
+@keyframes packet {
+  from {
+    left: 8%;
+  }
+
+  to {
+    left: 91%;
+  }
+}
+
+.system-node {
+  position: absolute;
+  top: calc(55% - 11px);
+  width: 23px;
+  height: 23px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  transform: rotate(45deg);
+}
+
+.system-node span {
+  position: absolute;
+  transform: rotate(-45deg);
+  left: -20px;
+  top: 30px;
+  width: 65px;
+  font-size: 7px;
+  text-align: center;
+  letter-spacing: .06em;
+}
+
+.node-1 { left: 8%; }
+.node-2 { left: 27%; }
+.node-3 { left: 46%; }
+.node-4 { left: 65%; }
+.node-5 { left: 84%; }
+
+/* ==================================================
+   RESULTS
+================================================== */
+
+.results {
+  margin: 38px 0 38px 180px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--line);
+  grid-template-columns: repeat(4,1fr);
   border-left: 1px solid var(--line);
-  margin: 30px 0;
+  border-top: 1px solid var(--line);
 }
 
-.result-grid > div {
+.result {
   padding: 20px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
 .result-value {
+  font-family: "Michroma", sans-serif;
+  font-size: 18px;
   display: block;
-  font-size: 21px;
-  margin-bottom: 5px;
 }
 
 .result-label {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.08em;
+  font-size: 8px;
+  margin-top: 5px;
 }
 
-/* SYSTEM MAP */
+/* ==================================================
+   SYSTEM MAP
+================================================== */
 
 .system-map {
-  margin: 30px 0;
+  margin: 38px 0 38px 180px;
   border-top: 1px solid var(--line);
 }
 
 .system-row {
   display: grid;
-  grid-template-columns: 60px 180px 1fr;
+  grid-template-columns: 50px 170px 1fr;
   gap: 20px;
+  border-bottom: 1px solid var(--line-soft);
   padding: 13px 0;
-  border-bottom: 1px solid var(--soft);
-  font-size: 11px;
+  font-size: 10px;
 }
 
-.system-number {
+.system-num {
   color: var(--muted);
 }
 
 .system-name {
   color: var(--red);
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
-/* SOURCES */
+/* ==================================================
+   SOURCES
+================================================== */
 
-.source-links {
-  margin-top: 30px;
-  padding-top: 18px;
+.sources {
+  margin: 38px 0 0 180px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
-  align-items: center;
 }
 
 .source-label {
+  display: block;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  width: 100%;
+  font-size: 8px;
+  letter-spacing: .1em;
+  margin-bottom: 13px;
 }
 
-.source-links a {
+.sources a {
+  display: inline-block;
+  margin-right: 25px;
   color: var(--red);
-  font-size: 10px;
   text-decoration: none;
+  font-size: 9px;
 }
 
-.source-links a:hover {
+.sources a:hover {
   text-decoration: underline;
 }
 
-.research-note {
-  margin: 22px 0 0;
-  color: var(--muted);
-  font-size: 10px;
+.note {
+  margin: 22px 0 0 180px;
   max-width: 800px;
+  color: var(--muted);
+  font-size: 9px;
 }
 
-/* LAUNCH */
+/* ==================================================
+   LAUNCH
+================================================== */
 
 .launch {
-  padding: 90px 0;
+  min-height: 470px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.launch-graphic {
+  position: absolute;
+  right: 5%;
+  width: 270px;
+  height: 270px;
+  border: 1px solid var(--line);
+}
+
+.launch-graphic::before {
+  content: "";
+  position: absolute;
+  inset: 25px;
+  border: 1px solid var(--line);
+}
+
+.launch-graphic::after {
+  content: "";
+  position: absolute;
+  inset: 70px;
+  border: 1px solid var(--red);
+  animation: squarepulse 3s ease-in-out infinite;
+}
+
+@keyframes squarepulse {
+  0%,100% {
+    transform: scale(.85);
+    opacity: .3;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
 
 .launch-code {
   color: var(--red);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: .13em;
 }
 
 .launch h2 {
-  margin: 14px 0;
-  font-size: clamp(30px, 5vw, 58px);
-  font-weight: 500;
-  letter-spacing: -0.05em;
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px,6vw,68px);
+  letter-spacing: .02em;
+  margin: 16px 0 25px;
 }
 
 .launch p {
-  max-width: 650px;
-  color: #56544f;
+  max-width: 620px;
+  color: var(--muted);
 }
 
-/* LICENSE */
+/* ==================================================
+   LICENSE
+================================================== */
 
-.license {
-  background: #eae7df;
-  margin-left: calc((100vw - min(1180px, calc(100vw - 40px))) / -2);
-  margin-right: calc((100vw - min(1180px, calc(100vw - 40px))) / -2);
-  padding: 55px max(20px, calc((100vw - min(1180px, calc(100vw - 40px))) / 2));
+.license-section {
+  background: var(--paper-dark);
+  margin-left: calc((100vw - min(1240px, calc(100vw - 42px))) / -2);
+  margin-right: calc((100vw - min(1240px, calc(100vw - 42px))) / -2);
+  padding-left: max(21px,calc((100vw - min(1240px,calc(100vw - 42px))) / 2));
+  padding-right: max(21px,calc((100vw - min(1240px,calc(100vw - 42px))) / 2));
 }
 
 .license-inner {
-  max-width: 1180px;
-  margin: 0 auto;
+  max-width: 1240px;
+  margin: auto;
 }
 
 .license-code {
   color: var(--red);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: .12em;
 }
 
-.license h2 {
-  margin: 12px 0 18px;
+.license-title {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
   font-size: 22px;
-  font-weight: 500;
+  margin: 15px 0 20px;
 }
 
-.license p {
-  max-width: 760px;
-  color: #57554f;
+.license-text {
+  max-width: 750px;
+  color: #55524d;
 }
 
 .license-meta {
-  margin-top: 28px;
+  margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  max-width: 700px;
-  gap: 25px;
+  grid-template-columns: repeat(3,1fr);
+  max-width: 760px;
 }
 
-.license-meta div {
-  border-top: 1px solid #c8c4bc;
-  padding-top: 9px;
+.license-meta > div {
+  border-top: 1px solid var(--line);
+  padding: 10px 20px 0 0;
+  font-size: 9px;
 }
 
-.license-meta span {
+.license-meta small {
   display: block;
   color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+  font-size: 8px;
 }
 
-/* FOOTER */
+/* ==================================================
+   FOOTER
+================================================== */
 
 footer {
-  border-top: 1px solid var(--line);
-  padding: 25px 0 50px;
+  min-height: 100px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  align-items: center;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
-/* MOBILE */
+/* ==================================================
+   MOBILE
+================================================== */
 
-@media (max-width: 760px) {
+@media (max-width:850px) {
 
   .page {
-    width: min(100% - 28px, 1180px);
-  }
-
-  header {
-    min-height: 75px;
+    width: min(100% - 28px,1240px);
   }
 
   .hero {
-    padding: 75px 0 85px;
+    min-height: 610px;
   }
 
-  .hero h1 {
-    font-size: 48px;
+  .hero-title {
+    font-size: 45px;
   }
 
-  section {
-    padding: 55px 0;
+  .orbit-system {
+    opacity: .35;
+    right: -70px;
   }
 
-  .section-heading {
-    margin-bottom: 30px;
+  .telemetry {
+    display: none;
+  }
+
+  .architecture {
+    grid-template-columns: 1fr;
   }
 
   .product {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: 100px 1fr;
   }
 
-  .price {
+  .product-price {
+    grid-column: 2;
     text-align: left;
   }
 
-  .product-meta {
+  .output-top {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .output-type {
+    grid-column: 2;
+  }
+
+  .output-description,
+  .data-table,
+  .technical-box,
+  .typing-panel,
+  .system-graphic,
+  .results,
+  .system-map,
+  .sources,
+  .note {
+    margin-left: 0;
+  }
+
+  .results {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+}
+
+@media (max-width:580px) {
+
+  body {
+    font-size: 11px;
+  }
+
+  header {
+    height: 72px;
+  }
+
+  .brand {
+    font-size: 9px;
+  }
+
+  .header-status {
+    font-size: 7px;
+  }
+
+  .hero {
+    min-height: 570px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+  }
+
+  .hero-coordinates {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  section {
+    padding: 65px 0;
+  }
+
+  .section-head {
+    display: block;
+  }
+
+  .section-title {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .product {
+    display: block;
+  }
+
+  .product-index {
+    margin-bottom: 20px;
+  }
+
+  .product-price {
+    margin-top: 25px;
+  }
+
+  .product-data {
     grid-template-columns: 1fr 1fr;
   }
 
-  .bundle,
-  .universal-license {
-    grid-template-columns: 1fr;
+  .output-top {
+    display: block;
   }
 
-  .bundle-price,
-  .universal-price {
-    text-align: left;
+  .output-title {
+    margin-top: 15px;
+    font-size: 19px;
   }
 
-  .output-header {
-    flex-direction: column;
-    gap: 12px;
+  .output-type {
+    display: inline-block;
+    margin-top: 15px;
   }
 
   .data-row {
     grid-template-columns: 1fr;
-    gap: 4px;
-  }
-
-  .result-grid {
-    grid-template-columns: 1fr 1fr;
+    gap: 3px;
   }
 
   .system-row {
@@ -609,12 +1267,36 @@ footer {
 
   .license-meta {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .launch-graphic {
+    right: -120px;
+    opacity: .3;
   }
 
   footer {
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    padding: 25px 0;
   }
+
 }
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+}
+
 </style>
 </head>
 
@@ -622,243 +1304,492 @@ footer {
 
 <div class="page">
 
-  <header>
-    <div class="brand">MORROW CULINARY SYSTEMS</div>
-    <div class="status">IN DEVELOPMENT</div>
-  </header>
+<header>
+
+  <div class="brand">
+    MORROW / CULINARY SYSTEMS
+  </div>
+
+  <div class="header-status">
+    <span class="status-light"></span>
+    SYSTEM / IN DEVELOPMENT
+  </div>
+
+</header>
 
 
-  <main>
+<main>
 
-    <!-- HERO -->
 
-    <section class="hero" style="border-top:0;">
+<!-- ==================================================
+     HERO
+================================================== -->
 
-      <div class="kicker">
-        FOOD TECHNOLOGY / CULINARY RESEARCH
+<section class="hero">
+
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+
+  <div class="hero-ghost">
+    MCS
+  </div>
+
+
+  <div class="telemetry">
+
+    <div class="telemetry-row">
+      <span>SYS</span>
+      <span class="telemetry-value" id="telemetrySys">001</span>
+    </div>
+
+    <div class="telemetry-row">
+      <span>CORE</span>
+      <span class="telemetry-value" id="telemetryCore">98.4</span>
+    </div>
+
+    <div class="telemetry-row">
+      <span>DATA</span>
+      <span class="telemetry-value" id="telemetryData">600</span>
+    </div>
+
+    <div class="telemetry-row">
+      <span>MODE</span>
+      <span class="telemetry-value">ACTIVE</span>
+    </div>
+
+  </div>
+
+
+  <div class="orbit-system">
+
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+    <div class="orbit"></div>
+
+    <div class="orbit-cross-x"></div>
+    <div class="orbit-cross-y"></div>
+
+    <div class="orbit-node"></div>
+    <div class="orbit-tick"></div>
+
+    <div class="orbit-label">
+      FOOD SYSTEM / ORBITAL RESEARCH
+    </div>
+
+  </div>
+
+
+  <div class="hero-content">
+
+    <div class="hero-index">
+      MCS // 00.01 // CULINARY TECHNOLOGY
+    </div>
+
+    <h1 class="hero-title">
+      <span id="heroTyped"></span><span class="cursor"></span>
+    </h1>
+
+    <p class="hero-subtitle">
+      An independent culinary technology studio developing
+      software-assisted methods for food measurement, composition,
+      sensory evaluation and computational food-system research.
+    </p>
+
+    <div class="hero-coordinates">
+
+      <div>
+        SYSTEM
+        <span>MCS</span>
       </div>
 
-      <h1>food, observed.</h1>
+      <div>
+        FIELD
+        <span>FOOD TECHNOLOGY</span>
+      </div>
 
-      <p>
-        Morrow Culinary Systems is an independent culinary technology
-        studio developing software-assisted methods for food product
-        research, sensory evaluation, ingredient systems and culinary
-        experimentation.
+      <div>
+        STATE
+        <span>ACTIVE DEVELOPMENT</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     ARCHITECTURE
+================================================== -->
+
+<section>
+
+  <div class="section-head">
+
+    <div class="section-number">
+      01 / SYSTEM
+    </div>
+
+    <div>
+
+      <h2 class="section-title">
+        CULINARY SYSTEM ARCHITECTURE
+      </h2>
+
+      <p class="section-description">
+        Morrow treats food as a measurable and compositional object.
+        Two software systems operate on different stages of the same
+        food-data pipeline.
       </p>
 
-    </section>
+    </div>
+
+  </div>
 
 
-    <!-- PRODUCTS -->
+  <div class="architecture">
 
-    <section>
+    <article class="arch-card" data-index="01">
 
-      <div class="section-heading">
-        <h2>PRODUCT SYSTEMS</h2>
-        <span class="section-number">01 / 02</span>
+      <div class="arch-code">MCS-01</div>
+
+      <h3>CULINOMETRIC</h3>
+
+      <p>
+        Measurement and analysis of food characteristics,
+        composition, proportions, preparation variables and
+        sensory attributes.
+      </p>
+
+      <div class="arch-flow">
+        MEASURE → ANALYZE → PROFILE
+        <div class="flow-line"></div>
       </div>
 
+    </article>
 
-      <article class="product">
 
-        <div>
-          <div class="product-code">MCS-01</div>
-          <div class="product-code">CULINOMETRIC</div>
+    <article class="arch-card" data-index="02">
+
+      <div class="arch-code">MCS-02</div>
+
+      <h3>COMPOSITA</h3>
+
+      <p>
+        Assembly and comparison of ingredient systems,
+        component relationships, formulations and proportional
+        changes.
+      </p>
+
+      <div class="arch-flow">
+        BUILD → COMPOSE → FORMULATE
+        <div class="flow-line"></div>
+      </div>
+
+    </article>
+
+
+    <article class="arch-card" data-index="03">
+
+      <div class="arch-code">MCS-FOOD</div>
+
+      <h3>FOOD OBJECT</h3>
+
+      <p>
+        The resulting food object becomes a structured record
+        capable of measurement, comparison, versioning and
+        downstream analysis.
+      </p>
+
+      <div class="arch-flow">
+        FOOD → DATA → FOOD
+        <div class="flow-line"></div>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PRODUCTS
+================================================== -->
+
+<section>
+
+  <div class="section-head">
+
+    <div class="section-number">
+      02 / PRODUCTS
+    </div>
+
+    <div>
+
+      <h2 class="section-title">
+        PRODUCT SYSTEMS
+      </h2>
+
+      <p class="section-description">
+        Proprietary software systems for culinary measurement
+        and food composition.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <article class="product">
+
+    <div class="product-index">
+      MCS
+      <strong>01</strong>
+    </div>
+
+    <div>
+
+      <h3>CULINOMETRIC</h3>
+
+      <p class="product-description">
+        A culinary measurement and analysis system for recording
+        structured characteristics of food. Composition,
+        proportions, sensory attributes, preparation variables
+        and derived values are organized into repeatable food
+        records.
+      </p>
+
+      <div class="product-data">
+
+        <div class="data-cell">
+          <small>FUNCTION</small>
+          MEASURE
         </div>
 
-        <div>
-
-          <h3>CULINOMETRIC</h3>
-
-          <p>
-            A culinary measurement and analysis system for recording
-            structured characteristics of food. Composition, proportions,
-            sensory attributes, preparation variables and derived values
-            are organized into a repeatable food record.
-          </p>
-
-          <div class="product-meta">
-
-            <div class="meta-item">
-              <span class="meta-label">FUNCTION</span>
-              <span class="meta-value">MEASURE</span>
-            </div>
-
-            <div class="meta-item">
-              <span class="meta-label">PROCESS</span>
-              <span class="meta-value">ANALYZE</span>
-            </div>
-
-            <div class="meta-item">
-              <span class="meta-label">OUTPUT</span>
-              <span class="meta-value">PROFILE</span>
-            </div>
-
-          </div>
-
+        <div class="data-cell">
+          <small>PROCESS</small>
+          ANALYZE
         </div>
 
-        <div class="price">$39</div>
-
-      </article>
-
-
-      <article class="product">
-
-        <div>
-          <div class="product-code">MCS-02</div>
-          <div class="product-code">COMPOSITA</div>
+        <div class="data-cell">
+          <small>OUTPUT</small>
+          PROFILE
         </div>
-
-        <div>
-
-          <h3>COMPOSITA</h3>
-
-          <p>
-            A food composition and formulation system for assembling,
-            comparing and versioning ingredient systems. Components,
-            relationships, classifications and proportional changes are
-            preserved as structured formulations.
-          </p>
-
-          <div class="product-meta">
-
-            <div class="meta-item">
-              <span class="meta-label">FUNCTION</span>
-              <span class="meta-value">BUILD</span>
-            </div>
-
-            <div class="meta-item">
-              <span class="meta-label">PROCESS</span>
-              <span class="meta-value">COMPOSE</span>
-            </div>
-
-            <div class="meta-item">
-              <span class="meta-label">OUTPUT</span>
-              <span class="meta-value">FORMULATION</span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="price">$49</div>
-
-      </article>
-
-
-      <div class="bundle">
-
-        <div>
-          <div class="bundle-code">MCS PRODUCT SYSTEM</div>
-          <h3>COMPLETE SYSTEM</h3>
-          <p>
-            CULINOMETRIC + COMPOSITA
-          </p>
-        </div>
-
-        <div class="bundle-price">$69</div>
 
       </div>
 
+    </div>
 
-      <div class="universal-license">
+    <div class="product-price">
+      $39
+    </div>
 
-        <div>
-          <div class="code">MCS SYSTEMS LICENSE</div>
-          <strong>UNIVERSAL LICENSE / MCS PRODUCT LINE</strong>
-          <p>
-            Universal license covering the MCS product line.
-          </p>
+  </article>
+
+
+  <article class="product">
+
+    <div class="product-index">
+      MCS
+      <strong>02</strong>
+    </div>
+
+    <div>
+
+      <h3>COMPOSITA</h3>
+
+      <p class="product-description">
+        A food composition and formulation system for assembling,
+        comparing and versioning ingredient systems. Components,
+        relationships, classifications and proportional changes
+        are preserved as structured formulations.
+      </p>
+
+      <div class="product-data">
+
+        <div class="data-cell">
+          <small>FUNCTION</small>
+          BUILD
         </div>
 
-        <div class="universal-price">$149</div>
+        <div class="data-cell">
+          <small>PROCESS</small>
+          COMPOSE
+        </div>
+
+        <div class="data-cell">
+          <small>OUTPUT</small>
+          FORMULATION
+        </div>
 
       </div>
 
-    </section>
+    </div>
+
+    <div class="product-price">
+      $49
+    </div>
+
+  </article>
 
 
-    <!-- RESEARCH OUTPUTS -->
+  <div class="license-row">
 
-    <section>
+    <div>
+      <strong>COMPLETE SYSTEM</strong>
+      <small>
+        CULINOMETRIC + COMPOSITA
+      </small>
+    </div>
 
-      <div class="section-heading">
-        <h2>RESEARCH OUTPUTS</h2>
-        <span class="section-number">SPACE / FOOD SYSTEMS</span>
+    <div class="license-price">
+      $69
+    </div>
+
+  </div>
+
+
+  <div class="license-row">
+
+    <div>
+      <strong>MCS SYSTEMS LICENSE</strong>
+      <small>
+        UNIVERSAL LICENSE / MCS PRODUCT LINE
+      </small>
+    </div>
+
+    <div class="license-price">
+      $149
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     RESEARCH
+================================================== -->
+
+<section>
+
+  <div class="section-head">
+
+    <div class="section-number">
+      03 / OUTPUTS
+    </div>
+
+    <div>
+
+      <h2 class="section-title">
+        RESEARCH OUTPUTS
+      </h2>
+
+      <p class="section-description">
+        Completed independent exercises examining food as a
+        computational, environmental and closed-loop systems object.
+      </p>
+
+    </div>
+
+  </div>
+
+
+<!-- SPACE 001 -->
+
+<article class="research-output">
+
+  <div class="output-top">
+
+    <div class="output-id">
+      MCS-SPACE
+      <strong>001</strong>
+    </div>
+
+    <h3 class="output-title">
+      ORBITAL FOOD DATA EXPERIMENT
+    </h3>
+
+    <div class="output-type">
+      COMPUTATIONAL EXPERIMENT
+    </div>
+
+  </div>
+
+
+  <p class="output-description">
+
+    A computational study examining how environmental observations
+    can be transformed into a compact data record for food-system
+    research. The experiment treats an orbital environment as a
+    measurable input rather than as a visual backdrop.
+
+  </p>
+
+
+  <div class="typing-panel">
+
+    <div class="typing-content">
+
+      <div class="typing-line">
+        <span class="prompt">MCS://</span>
+        <span id="typingOutput1"></span>
+        <span class="type-cursor"></span>
       </div>
 
+      <div class="typing-line" id="typingLine2"></div>
+      <div class="typing-line" id="typingLine3"></div>
+      <div class="typing-line" id="typingLine4"></div>
 
-      <!-- MCS-SPACE-001 -->
+    </div>
 
-      <article class="research-output">
-
-        <div class="output-header">
-
-          <div>
-            <span class="output-id">MCS-SPACE-001</span>
-            <h3>ORBITAL FOOD DATA EXPERIMENT</h3>
-          </div>
-
-          <span class="output-type">
-            COMPUTATIONAL EXPERIMENT
-          </span>
-
-        </div>
+  </div>
 
 
-        <p class="output-description">
-          A computational study examining how environmental observations
-          can be transformed into a compact data record for food-system
-          research. The experiment treats an orbital environment as a
-          measurable input rather than as a visual backdrop.
-        </p>
+  <div class="data-table">
+
+    <div class="data-row">
+      <span class="data-label">RESEARCH QUESTION</span>
+      <span>
+        Can environmental observations be reduced to a structured
+        record suitable for downstream food-system analysis?
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">INPUT</span>
+      <span>
+        ORBITAL SENSOR OBSERVATIONS / ENVIRONMENTAL VARIABLES
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">METHOD</span>
+      <span>
+        PYTHON / SENSOR DATA COLLECTION / NORMALIZATION /
+        TIME-SERIES ANALYSIS
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">OUTPUT</span>
+      <span>
+        STRUCTURED CSV DATASET / SUMMARY STATISTICS /
+        EXPERIMENT LOG
+      </span>
+    </div>
+
+  </div>
 
 
-        <div class="data-rows">
+  <div class="technical-box">
 
-          <div class="data-row">
-            <span class="label">RESEARCH QUESTION</span>
-            <span>
-              Can environmental observations be reduced to a structured
-              record suitable for downstream food-system analysis?
-            </span>
-          </div>
+    <div class="technical-content">
 
-          <div class="data-row">
-            <span class="label">INPUT</span>
-            <span>
-              ORBITAL SENSOR OBSERVATIONS / ENVIRONMENTAL VARIABLES
-            </span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">METHOD</span>
-            <span>
-              PYTHON / SENSOR DATA COLLECTION / NORMALIZATION /
-              TIME-SERIES ANALYSIS
-            </span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">OUTPUT</span>
-            <span>
-              STRUCTURED CSV DATASET / SUMMARY STATISTICS /
-              EXPERIMENT LOG
-            </span>
-          </div>
-
-        </div>
-
-
-        <div class="experiment">
-
-          <div class="experiment-title">
-            EXPERIMENT RECORD
-          </div>
-
-          <pre>
+<pre>
 ENVIRONMENTAL OBSERVATION
 ────────────────────────
 
@@ -889,183 +1820,225 @@ RESULT
 
 environmental state successfully converted
 into a machine-readable experimental record.
-          </pre>
+</pre>
 
-        </div>
+    </div>
 
-
-        <div class="result-grid">
-
-          <div>
-            <span class="result-value">600</span>
-            <span class="result-label">RECORDS</span>
-          </div>
-
-          <div>
-            <span class="result-value">CSV</span>
-            <span class="result-label">FORMAT</span>
-          </div>
-
-          <div>
-            <span class="result-value">COMPLETE</span>
-            <span class="result-label">STATUS</span>
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="source-links">
+  <div class="results">
 
-          <span class="source-label">
-            SOURCE MATERIAL
-          </span>
+    <div class="result">
+      <span class="result-value">600</span>
+      <span class="result-label">RECORDS</span>
+    </div>
 
-          <a
-            href="https://astro-pi.org/mission-space-lab"
-            target="_blank"
-            rel="noopener"
-          >
-            ASTRO PI / MISSION SPACE LAB
-          </a>
+    <div class="result">
+      <span class="result-value">CSV</span>
+      <span class="result-label">FORMAT</span>
+    </div>
 
-          <a
-            href="https://astro-pi.org/mission-space-lab/resources"
-            target="_blank"
-            rel="noopener"
-          >
-            ASTRO PI / RESOURCES
-          </a>
+    <div class="result">
+      <span class="result-value">10M</span>
+      <span class="result-label">WINDOW</span>
+    </div>
 
-          <a
-            href="https://astro-pi.org/mission-space-lab/rulebook"
-            target="_blank"
-            rel="noopener"
-          >
-            ASTRO PI / RULEBOOK
-          </a>
+    <div class="result">
+      <span class="result-value">DONE</span>
+      <span class="result-label">STATUS</span>
+    </div>
 
-        </div>
-
-        <p class="research-note">
-          Independent Morrow computational exercise using an
-          Astro Pi-style experimental structure. This record does not
-          represent an experiment performed aboard the ISS.
-        </p>
-
-      </article>
+  </div>
 
 
-      <!-- MCS-SPACE-002 -->
+  <div class="sources">
 
-      <article class="research-output">
+    <span class="source-label">
+      SOURCE MATERIAL
+    </span>
 
-        <div class="output-header">
+    <a
+      href="https://astro-pi.org/mission-space-lab"
+      target="_blank"
+      rel="noopener"
+    >
+      ASTRO PI / MISSION SPACE LAB
+    </a>
 
-          <div>
-            <span class="output-id">MCS-SPACE-002</span>
-            <h3>DEEP SPACE FOOD SYSTEM</h3>
-          </div>
+    <a
+      href="https://astro-pi.org/mission-space-lab/resources"
+      target="_blank"
+      rel="noopener"
+    >
+      ASTRO PI / RESOURCES
+    </a>
 
-          <span class="output-type">
-            FOOD SYSTEM MODEL
-          </span>
+    <a
+      href="https://astro-pi.org/mission-space-lab/rulebook"
+      target="_blank"
+      rel="noopener"
+    >
+      ASTRO PI / RULEBOOK
+    </a>
 
-        </div>
-
-
-        <p class="output-description">
-          A systems model for a six-person long-duration habitat treating
-          food as an integrated operational system. The model connects
-          production, storage, processing, preparation, consumption and
-          waste into one continuous resource flow.
-        </p>
-
-
-        <div class="data-rows">
-
-          <div class="data-row">
-            <span class="label">CREW</span>
-            <span>6 PERSONS</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">MISSION MODEL</span>
-            <span>LONG-DURATION / LIMITED RESUPPLY</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">PRIMARY OBJECTIVE</span>
-            <span>
-              MAXIMIZE NUTRITIONAL OUTPUT WHILE REDUCING RESOURCE
-              LOSS AND OPERATIONAL COMPLEXITY
-            </span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">SYSTEM VARIABLES</span>
-            <span>
-              FOOD MASS / WATER / ENERGY / STORAGE /
-              PROCESSING / WASTE / CREW TIME
-            </span>
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="system-map">
+  <p class="note">
+    Independent Morrow computational exercise using an Astro Pi-style
+    experimental structure. This record does not represent an experiment
+    performed aboard the ISS.
+  </p>
 
-          <div class="system-row">
-            <span class="system-number">01</span>
-            <span class="system-name">PRODUCTION</span>
-            <span>CULTIVATION + FOOD PRODUCTION</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">02</span>
-            <span class="system-name">STORAGE</span>
-            <span>PRESERVATION + INVENTORY CONTROL</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">03</span>
-            <span class="system-name">PROCESSING</span>
-            <span>RAW MATERIAL → USABLE FOOD COMPONENT</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">04</span>
-            <span class="system-name">PREPARATION</span>
-            <span>COMPONENTS → MEAL / SERVING</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">05</span>
-            <span class="system-name">CONSUMPTION</span>
-            <span>MEAL → NUTRITION + SENSORY EXPERIENCE</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">06</span>
-            <span class="system-name">WASTE</span>
-            <span>RESIDUAL MATERIAL → RECOVERY / PROCESSING / DISPOSAL</span>
-          </div>
-
-          <div class="system-row">
-            <span class="system-number">07</span>
-            <span class="system-name">FEEDBACK</span>
-            <span>SYSTEM PERFORMANCE → NEXT PRODUCTION CYCLE</span>
-          </div>
-
-        </div>
+</article>
 
 
-        <div class="experiment">
+<!-- SPACE 002 -->
 
-          <div class="experiment-title">
-            SYSTEM LOGIC
-          </div>
+<article class="research-output">
 
-          <pre>
+  <div class="output-top">
+
+    <div class="output-id">
+      MCS-SPACE
+      <strong>002</strong>
+    </div>
+
+    <h3 class="output-title">
+      DEEP SPACE FOOD SYSTEM
+    </h3>
+
+    <div class="output-type">
+      FOOD SYSTEM MODEL
+    </div>
+
+  </div>
+
+
+  <p class="output-description">
+
+    A systems model for a six-person long-duration habitat treating
+    food as an integrated operational system. The model connects
+    production, storage, processing, preparation, consumption and
+    waste into one continuous resource flow.
+
+  </p>
+
+
+  <div class="system-graphic">
+
+    <div class="system-track"></div>
+    <div class="system-packet"></div>
+
+    <div class="system-node node-1">
+      <span>PRODUCTION</span>
+    </div>
+
+    <div class="system-node node-2">
+      <span>STORAGE</span>
+    </div>
+
+    <div class="system-node node-3">
+      <span>PROCESSING</span>
+    </div>
+
+    <div class="system-node node-4">
+      <span>CONSUMPTION</span>
+    </div>
+
+    <div class="system-node node-5">
+      <span>RECOVERY</span>
+    </div>
+
+  </div>
+
+
+  <div class="data-table">
+
+    <div class="data-row">
+      <span class="data-label">CREW</span>
+      <span>6 PERSONS</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">MISSION MODEL</span>
+      <span>LONG-DURATION / LIMITED RESUPPLY</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">PRIMARY OBJECTIVE</span>
+      <span>
+        MAXIMIZE NUTRITIONAL OUTPUT WHILE REDUCING RESOURCE
+        LOSS AND OPERATIONAL COMPLEXITY
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">SYSTEM VARIABLES</span>
+      <span>
+        FOOD MASS / WATER / ENERGY / STORAGE /
+        PROCESSING / WASTE / CREW TIME
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="system-map">
+
+    <div class="system-row">
+      <span class="system-num">01</span>
+      <span class="system-name">PRODUCTION</span>
+      <span>CULTIVATION + FOOD PRODUCTION</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">02</span>
+      <span class="system-name">STORAGE</span>
+      <span>PRESERVATION + INVENTORY CONTROL</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">03</span>
+      <span class="system-name">PROCESSING</span>
+      <span>RAW MATERIAL → USABLE FOOD COMPONENT</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">04</span>
+      <span class="system-name">PREPARATION</span>
+      <span>COMPONENTS → MEAL / SERVING</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">05</span>
+      <span class="system-name">CONSUMPTION</span>
+      <span>MEAL → NUTRITION + SENSORY EXPERIENCE</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">06</span>
+      <span class="system-name">WASTE</span>
+      <span>RESIDUAL MATERIAL → RECOVERY / PROCESSING / DISPOSAL</span>
+    </div>
+
+    <div class="system-row">
+      <span class="system-num">07</span>
+      <span class="system-name">FEEDBACK</span>
+      <span>SYSTEM PERFORMANCE → NEXT PRODUCTION CYCLE</span>
+    </div>
+
+  </div>
+
+
+  <div class="technical-box">
+
+    <div class="technical-content">
+
+<pre>
+SYSTEM LOGIC
+
 PRODUCTION
     ↓
 STORAGE
@@ -1081,153 +2054,167 @@ WASTE
 RECOVERY
     ↓
 PRODUCTION
-          </pre>
+</pre>
 
-        </div>
+    </div>
 
-
-        <div class="data-rows">
-
-          <div class="data-row">
-            <span class="label">OUTPUT 01</span>
-            <span>SYSTEM MAP</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">OUTPUT 02</span>
-            <span>RESOURCE MODEL</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">OUTPUT 03</span>
-            <span>FOOD INVENTORY</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">OUTPUT 04</span>
-            <span>FAILURE ANALYSIS</span>
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="source-links">
+  <div class="sources">
 
-          <span class="source-label">
-            SOURCE MATERIAL
-          </span>
+    <span class="source-label">
+      SOURCE MATERIAL
+    </span>
 
-          <a
-            href="https://www.deepspacefood.org/"
-            target="_blank"
-            rel="noopener"
-          >
-            DEEP SPACE FOOD CONSORTIUM
-          </a>
+    <a
+      href="https://www.deepspacefood.org/"
+      target="_blank"
+      rel="noopener"
+    >
+      DEEP SPACE FOOD CONSORTIUM
+    </a>
 
-          <a
-            href="https://www.deepspacefood.org/members"
-            target="_blank"
-            rel="noopener"
-          >
-            DSFC / MEMBERS
-          </a>
+    <a
+      href="https://www.deepspacefood.org/members"
+      target="_blank"
+      rel="noopener"
+    >
+      DSFC / MEMBERS
+    </a>
 
-          <a
-            href="https://www.deepspacefood.org/collaborate"
-            target="_blank"
-            rel="noopener"
-          >
-            DSFC / COLLABORATE
-          </a>
+    <a
+      href="https://www.deepspacefood.org/collaborate"
+      target="_blank"
+      rel="noopener"
+    >
+      DSFC / COLLABORATE
+    </a>
 
-        </div>
-
-        <p class="research-note">
-          Independent Morrow Culinary Systems model informed by the
-          deep-space food-system research landscape. This model is not
-          an official DSFC certification or Consortium system.
-        </p>
-
-      </article>
+  </div>
 
 
-      <!-- MCS-SPACE-003 -->
+  <p class="note">
+    Independent Morrow Culinary Systems model informed by the
+    deep-space food-system research landscape. This model is not
+    an official DSFC certification or Consortium system.
+  </p>
 
-      <article class="research-output">
-
-        <div class="output-header">
-
-          <div>
-            <span class="output-id">MCS-SPACE-003</span>
-            <h3>REGENERATIVE FOOD LOOP</h3>
-          </div>
-
-          <span class="output-type">
-            SYSTEMS EXERCISE
-          </span>
-
-        </div>
+</article>
 
 
-        <p class="output-description">
-          A completed systems exercise examining how regenerative
-          space-food infrastructure can be translated into measurable
-          culinary objects. The model connects cultivation, edible
-          biomass, food composition, formulation, consumption, residual
-          material and resource recovery into one continuous food system.
-        </p>
+<!-- SPACE 003 -->
+
+<article class="research-output">
+
+  <div class="output-top">
+
+    <div class="output-id">
+      MCS-SPACE
+      <strong>003</strong>
+    </div>
+
+    <h3 class="output-title">
+      REGENERATIVE FOOD LOOP
+    </h3>
+
+    <div class="output-type">
+      SYSTEMS EXERCISE
+    </div>
+
+  </div>
 
 
-        <div class="data-rows">
+  <p class="output-description">
 
-          <div class="data-row">
-            <span class="label">RESEARCH QUESTION</span>
-            <span>
-              How can a regenerative food system be represented as a
-              measurable culinary system rather than only as a biological
-              or engineering system?
-            </span>
-          </div>
+    A completed systems exercise examining how regenerative space-food
+    infrastructure can be translated into measurable culinary objects.
+    The model connects cultivation, edible biomass, food composition,
+    formulation, consumption, residual material and resource recovery
+    into one continuous food system.
 
-          <div class="data-row">
-            <span class="label">SOURCE SYSTEM</span>
-            <span>
-              INTERSTELLAR LAB / FOOD PRODUCTION /
-              PLANT CULTIVATION / REGENERATIVE LIFE SUPPORT
-            </span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">REFERENCE MODEL</span>
-            <span>6 PERSON CREW / 30 DAY FOOD CYCLE</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">METHOD</span>
-            <span>
-              SYSTEM MODELING / CULINOMETRIC ANALYSIS /
-              COMPOSITA FORMULATION
-            </span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">PRIMARY OUTPUT</span>
-            <span>
-              MEASURABLE FOOD PRODUCTION LOOP
-            </span>
-          </div>
-
-        </div>
+  </p>
 
 
-        <div class="experiment">
+  <div class="typing-panel">
 
-          <div class="experiment-title">
-            REGENERATIVE FOOD LOOP
-          </div>
+    <div class="typing-content">
 
-          <pre>
+      <div class="typing-line">
+        <span class="prompt">MCS://LOOP/</span>
+        <span id="typingLoop"></span>
+        <span class="type-cursor"></span>
+      </div>
+
+      <div class="typing-line">
+        RESOURCE CHANNEL ........
+        <span id="resourceValue">85.0</span>%
+      </div>
+
+      <div class="typing-line">
+        BIOLOGICAL OUTPUT ........
+        <span id="bioValue">36.0</span> KG
+      </div>
+
+      <div class="typing-line">
+        SYSTEM STATE .............
+        <span style="color:#a32920;">STABLE</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="data-table">
+
+    <div class="data-row">
+      <span class="data-label">RESEARCH QUESTION</span>
+      <span>
+        How can a regenerative food system be represented as a
+        measurable culinary system rather than only as a biological
+        or engineering system?
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">SOURCE SYSTEM</span>
+      <span>
+        INTERSTELLAR LAB / FOOD PRODUCTION /
+        PLANT CULTIVATION / REGENERATIVE LIFE SUPPORT
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">REFERENCE MODEL</span>
+      <span>6 PERSON CREW / 30 DAY FOOD CYCLE</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">METHOD</span>
+      <span>
+        SYSTEM MODELING / CULINOMETRIC ANALYSIS /
+        COMPOSITA FORMULATION
+      </span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">PRIMARY OUTPUT</span>
+      <span>
+        MEASURABLE FOOD PRODUCTION LOOP
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="technical-box">
+
+    <div class="technical-content">
+
+<pre>
+REGENERATIVE FOOD LOOP
+
 RESOURCE INPUT
       ↓
 CULTIVATION
@@ -1249,18 +2236,20 @@ RESIDUAL
 RECOVERY
       ↓
 RESOURCE INPUT
-          </pre>
+</pre>
 
-        </div>
+    </div>
+
+  </div>
 
 
-        <div class="experiment">
+  <div class="technical-box">
 
-          <div class="experiment-title">
-            MCS TRANSLATION
-          </div>
+    <div class="technical-content">
 
-          <pre>
+<pre>
+MCS TRANSLATION
+
 BIOLOGICAL SYSTEM
         ↓
 FOOD MATERIAL
@@ -1270,53 +2259,55 @@ CULINOMETRIC RECORD
 COMPOSITA COMPONENT
         ↓
 FOOD OBJECT
-          </pre>
+</pre>
 
-        </div>
+    </div>
 
-
-        <div class="data-rows">
-
-          <div class="data-row">
-            <span class="label">FOOD OUTPUT</span>
-            <span>36.0 KG / 30 DAY MODEL</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">DAILY OUTPUT</span>
-            <span>1.20 KG</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">CREW ALLOCATION</span>
-            <span>200 G / PERSON / DAY</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">WATER RECOVERY</span>
-            <span>85.0 %</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">NUTRIENT RECOVERY</span>
-            <span>80.0 %</span>
-          </div>
-
-          <div class="data-row">
-            <span class="label">RESIDUAL RECOVERY</span>
-            <span>75.0 %</span>
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="experiment">
+  <div class="data-table">
 
-          <div class="experiment-title">
-            FOOD OUTPUT RECORD
-          </div>
+    <div class="data-row">
+      <span class="data-label">FOOD OUTPUT</span>
+      <span>36.0 KG / 30 DAY MODEL</span>
+    </div>
 
-          <pre>
+    <div class="data-row">
+      <span class="data-label">DAILY OUTPUT</span>
+      <span>1.20 KG</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">CREW ALLOCATION</span>
+      <span>200 G / PERSON / DAY</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">WATER RECOVERY</span>
+      <span>85.0 %</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">NUTRIENT RECOVERY</span>
+      <span>80.0 %</span>
+    </div>
+
+    <div class="data-row">
+      <span class="data-label">RESIDUAL RECOVERY</span>
+      <span>75.0 %</span>
+    </div>
+
+  </div>
+
+
+  <div class="technical-box">
+
+    <div class="technical-content">
+
+<pre>
+FOOD OUTPUT RECORD
+
 REG-FOOD-001
 
 EDIBLE BIOMASS
@@ -1336,18 +2327,20 @@ OTHER EDIBLE BIOMASS
 
 TOTAL
 36.0 KG
-          </pre>
+</pre>
 
-        </div>
+    </div>
+
+  </div>
 
 
-        <div class="experiment">
+  <div class="technical-box">
 
-          <div class="experiment-title">
-            CULINOMETRIC PASS
-          </div>
+    <div class="technical-content">
 
-          <pre>
+<pre>
+CULINOMETRIC PASS
+
 PLANT
   ↓
 BIOMASS
@@ -1359,18 +2352,20 @@ CULINOMETRIC RECORD
 COMPOSITA COMPONENT
   ↓
 MEAL
-          </pre>
+</pre>
 
-        </div>
+    </div>
+
+  </div>
 
 
-        <div class="experiment">
+  <div class="technical-box">
 
-          <div class="experiment-title">
-            COMPOSITA FORMULATION
-          </div>
+    <div class="technical-content">
 
-          <pre>
+<pre>
+COMPOSITA FORMULATION
+
 REG-FOOD-001 / FORMULATION 001
 
 COMPONENT                 MASS
@@ -1384,183 +2379,494 @@ SALT / MINERAL              5 G
 WATER                       15 G
 
 TOTAL                    1000 G
-          </pre>
+</pre>
 
-        </div>
+    </div>
 
-
-        <div class="result-grid">
-
-          <div>
-            <span class="result-value">36 KG</span>
-            <span class="result-label">FOOD OUTPUT</span>
-          </div>
-
-          <div>
-            <span class="result-value">85%</span>
-            <span class="result-label">WATER RECOVERY</span>
-          </div>
-
-          <div>
-            <span class="result-value">80%</span>
-            <span class="result-label">NUTRIENT RECOVERY</span>
-          </div>
-
-          <div>
-            <span class="result-value">75%</span>
-            <span class="result-label">RESIDUAL RECOVERY</span>
-          </div>
-
-          <div>
-            <span class="result-value">30 D</span>
-            <span class="result-label">REFERENCE CYCLE</span>
-          </div>
-
-          <div>
-            <span class="result-value">6</span>
-            <span class="result-label">REFERENCE CREW</span>
-          </div>
-
-        </div>
+  </div>
 
 
-        <div class="data-rows">
+  <div class="results">
 
-          <div class="data-row">
-            <span class="label">PRIMARY FINDING</span>
-            <span>
-              REGENERATIVE FOOD INFRASTRUCTURE CAN BE REPRESENTED AS
-              A CONTINUOUS CHAIN OF MEASURABLE FOOD OBJECTS.
-            </span>
-          </div>
+    <div class="result">
+      <span class="result-value">36 KG</span>
+      <span class="result-label">FOOD OUTPUT</span>
+    </div>
 
-          <div class="data-row">
-            <span class="label">CULINOMETRIC ROLE</span>
-            <span>MEASURE / ANALYZE / PROFILE</span>
-          </div>
+    <div class="result">
+      <span class="result-value">85%</span>
+      <span class="result-label">WATER RECOVERY</span>
+    </div>
 
-          <div class="data-row">
-            <span class="label">COMPOSITA ROLE</span>
-            <span>BUILD / COMPOSE / FORMULATE</span>
-          </div>
+    <div class="result">
+      <span class="result-value">80%</span>
+      <span class="result-label">NUTRIENT RECOVERY</span>
+    </div>
 
-          <div class="data-row">
-            <span class="label">STATUS</span>
-            <span>COMPLETE</span>
-          </div>
+    <div class="result">
+      <span class="result-value">75%</span>
+      <span class="result-label">RESIDUAL RECOVERY</span>
+    </div>
 
-        </div>
+  </div>
 
 
-        <div class="source-links">
+  <div class="data-table">
 
-          <span class="source-label">
-            SOURCE MATERIAL
-          </span>
+    <div class="data-row">
+      <span class="data-label">PRIMARY FINDING</span>
+      <span>
+        REGENERATIVE FOOD INFRASTRUCTURE CAN BE REPRESENTED AS
+        A CONTINUOUS CHAIN OF MEASURABLE FOOD OBJECTS.
+      </span>
+    </div>
 
-          <a
-            href="https://interstellarlab.com/news/interstellar-lab-and-nebex-partner-to-open-usd400-million-in-space-life-support-demand"
-            target="_blank"
-            rel="noopener"
-          >
-            INTERSTELLAR LAB × NEBEX / 2026
-          </a>
+    <div class="data-row">
+      <span class="data-label">CULINOMETRIC ROLE</span>
+      <span>MEASURE / ANALYZE / PROFILE</span>
+    </div>
 
-          <a
-            href="https://interstellarlab.com/space"
-            target="_blank"
-            rel="noopener"
-          >
-            INTERSTELLAR LAB / SPACE PROGRAM
-          </a>
+    <div class="data-row">
+      <span class="data-label">COMPOSITA ROLE</span>
+      <span>BUILD / COMPOSE / FORMULATE</span>
+    </div>
 
-        </div>
+    <div class="data-row">
+      <span class="data-label">STATUS</span>
+      <span>COMPLETE</span>
+    </div>
 
-
-        <p class="research-note">
-          Independent Morrow Culinary Systems exercise based on publicly
-          described Interstellar Lab systems. The modeled values are
-          hypothetical research values and are not measurements performed
-          by Interstellar Lab.
-        </p>
-
-      </article>
-
-    </section>
+  </div>
 
 
-    <!-- LAUNCH -->
+  <div class="sources">
 
-    <section class="launch">
+    <span class="source-label">
+      SOURCE MATERIAL
+    </span>
 
-      <div class="launch-code">
-        SYSTEM STATUS
+    <a
+      href="https://interstellarlab.com/news/interstellar-lab-and-nebex-partner-to-open-usd400-million-in-space-life-support-demand"
+      target="_blank"
+      rel="noopener"
+    >
+      INTERSTELLAR LAB × NEBEX / 2026
+    </a>
+
+    <a
+      href="https://interstellarlab.com/space"
+      target="_blank"
+      rel="noopener"
+    >
+      INTERSTELLAR LAB / SPACE PROGRAM
+    </a>
+
+  </div>
+
+
+  <p class="note">
+    Independent Morrow Culinary Systems exercise based on publicly
+    described Interstellar Lab systems. The modeled values are
+    hypothetical research values and are not measurements performed
+    by Interstellar Lab.
+  </p>
+
+</article>
+
+</section>
+
+
+<!-- ==================================================
+     STATUS
+================================================== -->
+
+<section class="launch">
+
+  <div class="launch-graphic"></div>
+
+  <div>
+
+    <div class="launch-code">
+      MCS / SYSTEM STATUS / 2026
+    </div>
+
+    <h2>
+      COMING SOON
+    </h2>
+
+    <p>
+      A small independent system for studying what we eat, how we
+      experience it, and how food can be understood through data.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     LICENSE
+================================================== -->
+
+<section class="license-section">
+
+  <div class="license-inner">
+
+    <div class="license-code">
+      SOFTWARE LICENSING / MCS-LIC-001
+    </div>
+
+    <h2 class="license-title">
+      PROPRIETARY SOFTWARE
+    </h2>
+
+    <p class="license-text">
+      Morrow Culinary Systems products are proprietary software.
+      Product licenses authorize use according to the license
+      purchased. The MCS Systems License provides universal coverage
+      for the MCS product line.
+    </p>
+
+    <div class="license-meta">
+
+      <div>
+        <small>INDIVIDUAL</small>
+        MCS PRODUCT LICENSE
       </div>
 
-      <h2>coming soon</h2>
-
-      <p>
-        A small independent system for studying what we eat, how we
-        experience it, and how food can be understood through data.
-      </p>
-
-    </section>
-
-
-    <!-- LICENSE -->
-
-    <section class="license">
-
-      <div class="license-inner">
-
-        <div class="license-code">
-          SOFTWARE LICENSING
-        </div>
-
-        <h2>PROPRIETARY SOFTWARE</h2>
-
-        <p>
-          Morrow Culinary Systems products are proprietary software.
-          Product licenses authorize use according to the license
-          purchased. The MCS Systems License provides universal coverage
-          for the MCS product line.
-        </p>
-
-        <div class="license-meta">
-
-          <div>
-            <span>INDIVIDUAL</span>
-            MCS PRODUCT LICENSE
-          </div>
-
-          <div>
-            <span>UNIVERSAL</span>
-            MCS PRODUCT LINE
-          </div>
-
-          <div>
-            <span>STATUS</span>
-            PROPRIETARY
-          </div>
-
-        </div>
-
+      <div>
+        <small>UNIVERSAL</small>
+        MCS PRODUCT LINE
       </div>
 
-    </section>
+      <div>
+        <small>STATUS</small>
+        PROPRIETARY
+      </div>
 
-  </main>
+    </div>
+
+  </div>
+
+</section>
 
 
-  <footer>
+</main>
 
-    <div>MCS / 001</div>
-    <div>NEW YORK / USA</div>
-    <div>2026</div>
 
-  </footer>
+<footer>
+
+  <div>MCS / 001</div>
+  <div>NEW YORK / USA</div>
+  <div>2026</div>
+
+</footer>
 
 </div>
+
+
+<script>
+
+/* ==================================================
+   HERO TYPING
+================================================== */
+
+const heroText = "food, observed.";
+const heroElement = document.getElementById("heroTyped");
+
+let heroIndex = 0;
+
+function typeHero() {
+
+  if (heroIndex <= heroText.length) {
+
+    heroElement.textContent =
+      heroText.slice(0, heroIndex);
+
+    heroIndex++;
+
+    setTimeout(typeHero, 95);
+
+  } else {
+
+    setTimeout(() => {
+
+      heroIndex = 0;
+      heroElement.textContent = "";
+
+      typeHero();
+
+    }, 7000);
+
+  }
+
+}
+
+typeHero();
+
+
+/* ==================================================
+   TELEMETRY
+================================================== */
+
+const telemetryCore =
+  document.getElementById("telemetryCore");
+
+const telemetryData =
+  document.getElementById("telemetryData");
+
+function telemetryTick() {
+
+  const core =
+    (97.4 + Math.random() * 2.2).toFixed(1);
+
+  const data =
+    Math.floor(580 + Math.random() * 45);
+
+  telemetryCore.textContent = core;
+  telemetryData.textContent = data;
+
+}
+
+setInterval(telemetryTick, 1300);
+
+
+/* ==================================================
+   RESEARCH TERMINAL TYPING
+================================================== */
+
+const terminalSequences = [
+
+  [
+    "INITIALIZE ORBITAL DATA CHANNEL",
+    "ENVIRONMENTAL VARIABLES DETECTED",
+    "NORMALIZATION COMPLETE",
+    "RECORD STRUCTURE READY"
+  ],
+
+  [
+    "READ SENSOR ARRAY",
+    "TIMESTAMP VECTOR GENERATED",
+    "600 OBSERVATIONS INDEXED",
+    "EXPORT CHANNEL READY"
+  ],
+
+  [
+    "MCS FOOD SYSTEM ANALYSIS",
+    "INPUT VECTOR ACCEPTED",
+    "STATISTICAL PROFILE GENERATED",
+    "EXPERIMENT COMPLETE"
+  ]
+
+];
+
+let sequenceIndex = 0;
+
+function runTerminalSequence() {
+
+  const sequence =
+    terminalSequences[sequenceIndex];
+
+  const ids = [
+    "typingOutput1",
+    "typingLine2",
+    "typingLine3",
+    "typingLine4"
+  ];
+
+  ids.forEach(id => {
+    document.getElementById(id).textContent = "";
+  });
+
+  let line = 0;
+
+  function nextLine() {
+
+    if (line >= sequence.length) {
+
+      setTimeout(() => {
+
+        sequenceIndex =
+          (sequenceIndex + 1) %
+          terminalSequences.length;
+
+        runTerminalSequence();
+
+      }, 2600);
+
+      return;
+    }
+
+    const element =
+      document.getElementById(ids[line]);
+
+    const text =
+      sequence[line];
+
+    let character = 0;
+
+    function typeCharacter() {
+
+      element.textContent =
+        text.slice(0, character);
+
+      character++;
+
+      if (character <= text.length) {
+
+        setTimeout(
+          typeCharacter,
+          24
+        );
+
+      } else {
+
+        line++;
+
+        setTimeout(
+          nextLine,
+          300
+        );
+
+      }
+
+    }
+
+    typeCharacter();
+
+  }
+
+  nextLine();
+
+}
+
+runTerminalSequence();
+
+
+/* ==================================================
+   REGENERATIVE LOOP TYPING
+================================================== */
+
+const loopMessages = [
+
+  "CULTIVATION CHANNEL ONLINE",
+  "BIOMASS TRANSFER DETECTED",
+  "CULINOMETRIC RECORD GENERATED",
+  "COMPOSITA FORMULATION ACTIVE",
+  "RECOVERY LOOP VERIFIED",
+  "FOOD OBJECT REGISTERED"
+];
+
+const typingLoop =
+  document.getElementById("typingLoop");
+
+let loopIndex = 0;
+
+function loopType() {
+
+  const text =
+    loopMessages[loopIndex];
+
+  let character = 0;
+
+  typingLoop.textContent = "";
+
+  function write() {
+
+    typingLoop.textContent =
+      text.slice(0, character);
+
+    character++;
+
+    if (character <= text.length) {
+
+      setTimeout(write, 35);
+
+    } else {
+
+      setTimeout(() => {
+
+        loopIndex =
+          (loopIndex + 1) %
+          loopMessages.length;
+
+        loopType();
+
+      }, 1300);
+
+    }
+
+  }
+
+  write();
+
+}
+
+loopType();
+
+
+/* ==================================================
+   LIVE RESOURCE VALUES
+================================================== */
+
+const resourceValue =
+  document.getElementById("resourceValue");
+
+const bioValue =
+  document.getElementById("bioValue");
+
+function updateResearchValues() {
+
+  const water =
+    (83.5 + Math.random() * 3).toFixed(1);
+
+  const biomass =
+    (35.4 + Math.random() * 1.2).toFixed(1);
+
+  resourceValue.textContent = water;
+  bioValue.textContent = biomass;
+
+}
+
+setInterval(
+  updateResearchValues,
+  1700
+);
+
+
+/* ==================================================
+   SCROLL ACTIVATION
+================================================== */
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("active");
+
+        }
+
+      });
+
+    },
+    {
+      threshold: .15
+    }
+  );
+
+document
+  .querySelectorAll(".research-output, .arch-card, .product")
+  .forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+</script>
 
 </body>
 </html>
