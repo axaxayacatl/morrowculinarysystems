@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Morrow Culinary Systems</title>
@@ -10,547 +11,977 @@
   name="description"
   content="Morrow Culinary Systems is an independent culinary technology studio developing software-assisted methods for food product research, sensory evaluation, ingredient systems and culinary experimentation."
 >
+
 <meta name="author" content="Morrow Culinary Systems">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link
   href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
   rel="stylesheet"
 >
 
 <style>
-  :root {
-    --paper: #f4f2ed;
-    --ink: #111111;
-    --muted: #77736d;
-    --line: #c9c5bd;
-    --red: #a63b2f;
-  }
 
-  * {
-    box-sizing: border-box;
-  }
+:root {
+  --paper: #f4f2ed;
+  --ink: #171717;
+  --muted: #77746e;
+  --line: #c9c6bf;
+  --accent: #a63b2f;
+}
 
-  html {
-    scroll-behavior: smooth;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 13px;
-    line-height: 1.6;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  main {
-    width: min(1100px, calc(100% - 40px));
-    margin: 0 auto;
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+header {
+  min-height: 150px;
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+
+.status {
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: .05em;
+}
+
+/* HERO */
+
+.hero {
+  padding: 100px 0 110px;
+}
+
+.kicker {
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(42px, 8vw, 94px);
+  line-height: .95;
+  font-weight: 400;
+  letter-spacing: -.06em;
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 38px 0 0;
+  color: #46443f;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* SECTION */
+
+section {
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .07em;
+}
+
+.section-description {
+  font-size: 11px;
+}
+
+/* PRODUCTS */
+
+.product {
+  display: grid;
+  grid-template-columns: 100px 1fr 120px;
+  gap: 25px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.product-number {
+  color: var(--muted);
+}
+
+.product-name {
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.product-description {
+  max-width: 650px;
+  color: #55524c;
+  line-height: 1.75;
+}
+
+.product-price {
+  text-align: right;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* BUNDLE */
+
+.bundle {
+  padding: 38px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bundle-grid {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 25px;
+}
+
+.bundle-name {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.bundle-description {
+  max-width: 650px;
+  color: #55524c;
+}
+
+.bundle-price {
+  text-align: right;
+  font-size: 14px;
+}
+
+/* UNIVERSAL LICENSE */
+
+.universal {
+  padding: 28px 0 34px;
+}
+
+.universal-grid {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 25px;
+}
+
+.universal-name {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.universal-description {
+  max-width: 650px;
+  color: #55524c;
+}
+
+.universal-note {
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+.universal-price {
+  text-align: right;
+  font-size: 14px;
+}
+
+/* RESEARCH OUTPUTS */
+
+.research {
+  margin-top: 100px;
+}
+
+.output {
+  padding: 34px 0 42px;
+  border-bottom: 1px solid var(--line);
+}
+
+.output-id {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .05em;
+}
+
+.output-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: start;
+}
+
+.output h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: .035em;
+}
+
+.output-type {
+  color: var(--accent);
+  font-size: 9px;
+  letter-spacing: .05em;
+  text-align: right;
+}
+
+.output-description {
+  max-width: 760px;
+  margin: 0 0 28px;
+  color: #4d4a45;
+  line-height: 1.8;
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 10px;
+}
+
+.data-label {
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+
+.data-value {
+  color: var(--ink);
+}
+
+/* SOURCE LINKS */
+
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.source-links a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+  transition: color .15s ease, border-color .15s ease;
+}
+
+.source-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* EXPERIMENT RESULT */
+
+.experiment {
+  margin-top: 25px;
+  border: 1px solid var(--line);
+}
+
+.experiment-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--line);
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.experiment-body {
+  padding: 20px;
+}
+
+.experiment-code {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #34322f;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+
+.result {
+  padding: 15px;
+  border-right: 1px solid var(--line);
+}
+
+.result:last-child {
+  border-right: 0;
+}
+
+.result-label {
+  color: var(--muted);
+  font-size: 9px;
+  margin-bottom: 6px;
+}
+
+.result-value {
+  font-size: 11px;
+}
+
+/* FOOD SYSTEM */
+
+.system-map {
+  margin-top: 25px;
+  border: 1px solid var(--line);
+}
+
+.system-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  min-height: 52px;
+  border-bottom: 1px solid var(--line);
+}
+
+.system-row:last-child {
+  border-bottom: 0;
+}
+
+.system-label {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  color: var(--muted);
+  border-right: 1px solid var(--line);
+  font-size: 9px;
+}
+
+.system-value {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  font-size: 10px;
+}
+
+/* LAUNCH */
+
+.launch {
+  padding: 90px 0;
+  text-align: center;
+}
+
+.launch-label {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.launch h2 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+
+.launch p {
+  max-width: 560px;
+  margin: 28px auto 0;
+  color: #55524c;
+  line-height: 1.8;
+}
+
+/* LICENSE */
+
+.license {
+  padding: 30px 0;
+}
+
+.license-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 30px;
+}
+
+.license-title {
+  font-size: 11px;
+  letter-spacing: .05em;
+}
+
+.license-text {
+  max-width: 700px;
+  color: #55524c;
+  line-height: 1.8;
+}
+
+.license-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.license-meta div {
+  padding: 12px 15px;
+  border-right: 1px solid var(--line);
+}
+
+.license-meta div:last-child {
+  border-right: 0;
+}
+
+.license-meta span {
+  display: block;
+}
+
+.meta-label {
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.meta-value {
+  font-size: 10px;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 80px;
+  padding: 20px 0 30px;
+  border-top: 1px solid var(--line);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .04em;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .page {
+    width: min(100% - 28px, 1120px);
   }
 
   header {
-    min-height: 110px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--ink);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .brand {
-    font-size: 13px;
-    letter-spacing: .04em;
-  }
-
-  .status {
-    color: var(--red);
-    font-size: 11px;
-    letter-spacing: .08em;
+    min-height: 120px;
   }
 
   .hero {
-    padding: 120px 0 110px;
-    border-bottom: 1px solid var(--ink);
+    padding: 70px 0 80px;
   }
 
-  .kicker {
-    margin-bottom: 24px;
-    color: var(--muted);
-    font-size: 11px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  h1 {
-    margin: 0;
-    max-width: 760px;
-    font-size: clamp(42px, 8vw, 88px);
-    line-height: .95;
-    font-weight: 400;
-    letter-spacing: -.06em;
-  }
-
-  .intro {
-    max-width: 610px;
-    margin-top: 42px;
-    color: #373532;
-    font-size: 14px;
-    line-height: 1.8;
-  }
-
-  .section {
-    padding: 70px 0;
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .section-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 28px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .section-label span:first-child {
-    font-size: 11px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-
-  .section-label span:last-child {
-    color: var(--muted);
-    font-size: 11px;
-  }
-
-  .products {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--ink);
-    border: 1px solid var(--ink);
+  .section-head {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .product {
-    min-height: 190px;
-    padding: 28px;
-    background: var(--paper);
-
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
+    grid-template-columns: 45px 1fr;
+    gap: 15px;
   }
 
-  .number {
-    color: var(--muted);
-    font-size: 11px;
-    flex-shrink: 0;
+  .product-price {
+    grid-column: 2;
+    text-align: left;
   }
 
-  .product-content {
-    display: flex;
-    flex-direction: column;
-    min-height: 130px;
+  .bundle-grid,
+  .universal-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
-  .product h2 {
-    margin: 0 0 12px;
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: 400;
-    letter-spacing: .04em;
+  .bundle-price,
+  .universal-price {
+    text-align: left;
   }
 
-  .price {
-    color: var(--red);
-    font-size: 13px;
+  .output-header {
+    grid-template-columns: 1fr;
+    gap: 5px;
   }
 
-  .system-price {
-    margin-top: 1px;
-    padding: 18px 24px;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .output-type {
+    text-align: left;
   }
 
-  .system-price .label {
-    color: var(--muted);
-    font-size: 11px;
-    letter-spacing: .08em;
+  .data-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
   }
 
-  .system-price .price {
-    font-size: 14px;
+  .result-grid {
+    grid-template-columns: 1fr;
   }
 
-  .system-license {
-    margin-top: 1px;
-    padding: 18px 24px;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .result {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .system-license-label {
+  .result:last-child {
+    border-bottom: 0;
+  }
+
+  .system-row {
+    grid-template-columns: 1fr;
+  }
+
+  .system-label {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .source-links {
     display: block;
-    font-size: 11px;
-    letter-spacing: .08em;
   }
 
-  .system-license-note {
+  .source-links a {
     display: block;
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: .05em;
+    width: fit-content;
+    margin-bottom: 10px;
   }
 
-  .system-license .price {
-    font-size: 14px;
-  }
-
-  .license {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 40px;
-  }
-
-  .license-title {
-    font-size: 14px;
-    letter-spacing: .04em;
-  }
-
-  .license-copy {
-    max-width: 650px;
-    color: #373532;
-    font-size: 12px;
-    line-height: 1.8;
+  .license-body {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
   .license-meta {
-    margin-top: 24px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 1px;
-    background: var(--ink);
-    border: 1px solid var(--ink);
+    grid-template-columns: 1fr;
   }
 
   .license-meta div {
-    padding: 16px;
-    background: var(--paper);
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .license-meta span {
-    display: block;
-  }
-
-  .meta-label {
-    margin-bottom: 6px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: .08em;
-  }
-
-  .meta-value {
-    font-size: 11px;
-  }
-
-  .launch {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
-  }
-
-  .launch-title {
-    font-size: 32px;
-    line-height: 1;
-    letter-spacing: -.04em;
-  }
-
-  .launch-note {
-    max-width: 430px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.7;
+  .license-meta div:last-child {
+    border-bottom: 0;
   }
 
   footer {
-    min-height: 100px;
-    padding: 28px 0;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: .04em;
+    display: block;
   }
 
-  footer div:nth-child(2) {
-    text-align: center;
+  footer span {
+    display: block;
+    margin-bottom: 7px;
   }
 
-  footer div:last-child {
-    text-align: right;
-  }
+}
 
-  @media (max-width: 700px) {
-
-    main {
-      width: min(100% - 28px, 1100px);
-    }
-
-    header {
-      min-height: 90px;
-      padding: 22px 0;
-    }
-
-    .hero {
-      padding: 80px 0 75px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 15vw, 70px);
-    }
-
-    .intro {
-      font-size: 13px;
-    }
-
-    .section {
-      padding: 50px 0;
-    }
-
-    .products {
-      grid-template-columns: 1fr;
-    }
-
-    .product {
-      min-height: 150px;
-    }
-
-    .system-price,
-    .system-license {
-      gap: 20px;
-    }
-
-    .license {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .license-meta {
-      grid-template-columns: 1fr;
-    }
-
-    .launch {
-      display: block;
-    }
-
-    .launch-note {
-      margin-top: 28px;
-    }
-
-    footer {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-
-    footer div,
-    footer div:nth-child(2),
-    footer div:last-child {
-      text-align: left;
-    }
-  }
 </style>
 </head>
 
 <body>
 
+<div class="page">
+
+<header>
+
+  <div class="brand">
+    MORROW CULINARY SYSTEMS
+  </div>
+
+  <div class="status">
+    IN DEVELOPMENT
+  </div>
+
+</header>
+
+
 <main>
 
-  <header>
-    <div class="brand">
-      MORROW CULINARY SYSTEMS
-    </div>
+<!-- HERO -->
 
-    <div class="status">
-      IN DEVELOPMENT
-    </div>
-  </header>
+<div class="hero">
 
+  <div class="kicker">
+    food technology / culinary research
+  </div>
 
-  <section class="hero">
+  <h1>
+    food, observed.
+  </h1>
 
-    <div class="kicker">
-      food technology / culinary research
-    </div>
+  <p>
+    Morrow Culinary Systems is an independent culinary technology
+    studio developing software-assisted methods for food product
+    research, sensory evaluation, ingredient systems and culinary
+    experimentation.
+  </p>
 
-    <h1>
-      food, observed.
-    </h1>
-
-    <p class="intro">
-      Morrow Culinary Systems is an independent culinary technology
-      studio developing software-assisted methods for food product
-      research, sensory evaluation, ingredient systems and culinary
-      experimentation.
-    </p>
-
-  </section>
+</div>
 
 
-  <section class="section">
+<!-- PRODUCTS -->
+
+<section>
+
+  <div class="section-head">
 
     <div class="section-label">
-      <span>systems</span>
-      <span>mcs / 001–002</span>
+      PRODUCTS
     </div>
 
-    <div class="products">
+    <div class="section-description">
+      SOFTWARE SYSTEMS FOR CULINARY MEASUREMENT AND FORMULATION
+    </div>
 
-      <article class="product">
-
-        <span class="number">01</span>
-
-        <div class="product-content">
-
-          <h2>
-            MCS-01 CULINOMETRIC
-          </h2>
-
-          <span class="price">
-            $39
-          </span>
-
-        </div>
-
-      </article>
+  </div>
 
 
-      <article class="product">
+  <div class="product">
 
-        <span class="number">02</span>
+    <div class="product-number">
+      01
+    </div>
 
-        <div class="product-content">
+    <div>
 
-          <h2>
-            MCS-02 COMPOSITA
-          </h2>
+      <div class="product-name">
+        MCS-01 CULINOMETRIC
+      </div>
 
-          <span class="price">
-            $49
-          </span>
-
-        </div>
-
-      </article>
+      <div class="product-description">
+        A culinary measurement and analysis system for structured
+        characteristics, composition, proportions, sensory attributes,
+        preparation variables and derived food profiles.
+        <br><br>
+        food → measurements → structured culinary data
+      </div>
 
     </div>
 
+    <div class="product-price">
+      $39
+    </div>
 
-    <div class="system-price">
+  </div>
 
-      <span class="label">
-        COMPLETE SYSTEM
-      </span>
 
-      <span class="price">
-        $69
-      </span>
+  <div class="product">
+
+    <div class="product-number">
+      02
+    </div>
+
+    <div>
+
+      <div class="product-name">
+        MCS-02 COMPOSITA
+      </div>
+
+      <div class="product-description">
+        A food composition and formulation system for assembling,
+        comparing and documenting ingredient systems, component
+        relationships and formulation versions.
+        <br><br>
+        ingredients → relationships → composition
+      </div>
 
     </div>
 
+    <div class="product-price">
+      $49
+    </div>
 
-    <div class="system-license">
+  </div>
+
+
+  <div class="bundle">
+
+    <div class="bundle-grid">
 
       <div>
 
-        <span class="system-license-label">
-          MCS SYSTEMS LICENSE
-        </span>
+        <div class="bundle-name">
+          COMPLETE SYSTEM
+        </div>
 
-        <span class="system-license-note">
-          UNIVERSAL LICENSE / MCS PRODUCT LINE
-        </span>
+        <div class="bundle-description">
+          CULINOMETRIC + COMPOSITA
+        </div>
 
       </div>
 
-      <span class="price">
-        $149
-      </span>
+      <div class="bundle-price">
+        $69
+      </div>
 
     </div>
 
-  </section>
+  </div>
 
 
-  <section class="section">
+  <div class="universal">
+
+    <div class="universal-grid">
+
+      <div>
+
+        <div class="universal-name">
+          MCS SYSTEMS LICENSE
+        </div>
+
+        <div class="universal-description">
+          Universal license for the Morrow Culinary Systems product line.
+        </div>
+
+        <div class="universal-note">
+          UNIVERSAL LICENSE / MCS PRODUCT LINE
+        </div>
+
+      </div>
+
+      <div class="universal-price">
+        $149
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESEARCH OUTPUTS -->
+
+<section class="research">
+
+  <div class="section-head">
 
     <div class="section-label">
-      <span>license</span>
-      <span>mcs / terms</span>
+      RESEARCH OUTPUTS
     </div>
 
-    <div class="license">
+    <div class="section-description">
+      COMPLETED EXPERIMENTS / SYSTEM MODELS / TECHNICAL RECORDS
+    </div>
 
-      <div class="license-title">
-        PROPRIETARY SOFTWARE
+  </div>
+
+
+  <!-- OUTPUT 001 -->
+
+  <article class="output">
+
+    <div class="output-id">
+      MCS-SPACE-001
+    </div>
+
+    <div class="output-header">
+
+      <div>
+
+        <h3>
+          ORBITAL FOOD DATA EXPERIMENT
+        </h3>
+
       </div>
 
-      <div class="license-copy">
+      <div class="output-type">
+        COMPUTATIONAL EXPERIMENT
+      </div>
 
-        Morrow Culinary Systems software is distributed under
-        proprietary licensing. Product licenses authorize use of
-        the corresponding MCS software according to the license
-        purchased.
+    </div>
 
-        <div class="license-meta">
 
-          <div>
-            <span class="meta-label">
-              PRODUCT
-            </span>
+    <p class="output-description">
+      A computational study examining how environmental sensor
+      observations can be transformed into a compact data record for
+      food-system research. The experiment treats an orbital
+      environment as a measurable input rather than as a visual
+      backdrop.
+    </p>
 
-            <span class="meta-value">
-              INDIVIDUAL
-            </span>
+
+    <div class="data-row">
+
+      <div class="data-label">
+        RESEARCH QUESTION
+      </div>
+
+      <div class="data-value">
+        Can environmental observations be reduced to a structured
+        record suitable for downstream food-system analysis?
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        INPUT
+      </div>
+
+      <div class="data-value">
+        ORBITAL SENSOR OBSERVATIONS / ENVIRONMENTAL VARIABLES
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        METHOD
+      </div>
+
+      <div class="data-value">
+        PYTHON / SENSOR DATA COLLECTION / NORMALIZATION /
+        TIME-SERIES ANALYSIS
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        OUTPUT
+      </div>
+
+      <div class="data-value">
+        STRUCTURED CSV DATASET / SUMMARY STATISTICS /
+        EXPERIMENT LOG
+      </div>
+
+    </div>
+
+
+    <div class="experiment">
+
+      <div class="experiment-head">
+
+        <span>
+          EXPERIMENT RECORD / 001
+        </span>
+
+        <span>
+          PYTHON
+        </span>
+
+      </div>
+
+      <div class="experiment-body">
+
+<pre class="experiment-code">ENVIRONMENTAL OBSERVATION
+────────────────────────
+
+SAMPLE WINDOW        10 MIN
+OBSERVATIONS         600
+SAMPLING INTERVAL    1 SEC
+
+VARIABLES
+temperature
+humidity
+pressure
+orientation
+
+PROCESS
+raw observation
+      ↓
+timestamp
+      ↓
+normalized record
+      ↓
+statistical profile
+      ↓
+food-system reference
+
+RESULT
+environmental state successfully converted
+into a machine-readable experimental record.</pre>
+
+
+        <div class="result-grid">
+
+          <div class="result">
+
+            <div class="result-label">
+              RECORDS
+            </div>
+
+            <div class="result-value">
+              600
+            </div>
+
           </div>
 
-          <div>
-            <span class="meta-label">
-              SYSTEMS
-            </span>
+          <div class="result">
 
-            <span class="meta-value">
-              UNIVERSAL
-            </span>
+            <div class="result-label">
+              FORMAT
+            </div>
+
+            <div class="result-value">
+              CSV
+            </div>
+
           </div>
 
-          <div>
-            <span class="meta-label">
+          <div class="result">
+
+            <div class="result-label">
               STATUS
-            </span>
+            </div>
 
-            <span class="meta-value">
-              PROPRIETARY
-            </span>
+            <div class="result-value">
+              COMPLETE
+            </div>
+
           </div>
 
         </div>
@@ -559,50 +990,401 @@
 
     </div>
 
-  </section>
 
+    <div class="data-row">
 
-  <section class="section">
-
-    <div class="section-label">
-      <span>availability</span>
-      <span>mcs / launch</span>
-    </div>
-
-    <div class="launch">
-
-      <div class="launch-title">
-        COMING SOON
+      <div class="data-label">
+        SOURCE MATERIAL
       </div>
 
-      <div class="launch-note">
-        A small independent system for studying what we eat,
-        how we experience it, and how food can be understood
-        through data.
+      <div class="data-value source-links">
+
+        <a
+          href="https://astro-pi.org/mission-space-lab"
+          target="_blank"
+          rel="noopener"
+        >
+          ASTRO PI / MISSION SPACE LAB
+        </a>
+
+        <a
+          href="https://astro-pi.org/mission-space-lab/resources"
+          target="_blank"
+          rel="noopener"
+        >
+          MISSION SPACE LAB RESOURCES
+        </a>
+
+        <a
+          href="https://astro-pi.org/mission-space-lab/rulebook"
+          target="_blank"
+          rel="noopener"
+        >
+          MISSION SPACE LAB GUIDELINES
+        </a>
+
       </div>
 
     </div>
 
-  </section>
+  </article>
 
 
-  <footer>
+  <!-- OUTPUT 002 -->
 
-    <div>
-      MCS / 001
+  <article class="output">
+
+    <div class="output-id">
+      MCS-SPACE-002
     </div>
 
-    <div>
-      NEW YORK / USA
+    <div class="output-header">
+
+      <div>
+
+        <h3>
+          DEEP SPACE FOOD SYSTEM
+        </h3>
+
+      </div>
+
+      <div class="output-type">
+        FOOD SYSTEM MODEL
+      </div>
+
     </div>
 
-    <div>
-      2026
+
+    <p class="output-description">
+      A systems model for a six-person long-duration habitat treating
+      food as an integrated operational system. The model connects
+      production, storage, processing, preparation, consumption and
+      waste into one continuous resource flow.
+    </p>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        CREW
+      </div>
+
+      <div class="data-value">
+        6 PERSONS
+      </div>
+
     </div>
 
-  </footer>
+
+    <div class="data-row">
+
+      <div class="data-label">
+        MISSION MODEL
+      </div>
+
+      <div class="data-value">
+        LONG-DURATION / LIMITED RESUPPLY
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        PRIMARY OBJECTIVE
+      </div>
+
+      <div class="data-value">
+        MAXIMIZE NUTRITIONAL OUTPUT WHILE REDUCING
+        RESOURCE LOSS AND OPERATIONAL COMPLEXITY
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        SYSTEM VARIABLES
+      </div>
+
+      <div class="data-value">
+        FOOD MASS / WATER / ENERGY / STORAGE /
+        PROCESSING / WASTE / CREW TIME
+      </div>
+
+    </div>
+
+
+    <div class="system-map">
+
+      <div class="system-row">
+
+        <div class="system-label">
+          01 / PRODUCTION
+        </div>
+
+        <div class="system-value">
+          CULTIVATION + FOOD PRODUCTION
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          02 / STORAGE
+        </div>
+
+        <div class="system-value">
+          PRESERVATION + INVENTORY CONTROL
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          03 / PROCESSING
+        </div>
+
+        <div class="system-value">
+          RAW MATERIAL → USABLE FOOD COMPONENT
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          04 / PREPARATION
+        </div>
+
+        <div class="system-value">
+          COMPONENTS → MEAL / SERVING
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          05 / CONSUMPTION
+        </div>
+
+        <div class="system-value">
+          MEAL → NUTRITION + SENSORY EXPERIENCE
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          06 / WASTE
+        </div>
+
+        <div class="system-value">
+          RESIDUAL MATERIAL → RECOVERY / PROCESSING / DISPOSAL
+        </div>
+
+      </div>
+
+
+      <div class="system-row">
+
+        <div class="system-label">
+          07 / FEEDBACK
+        </div>
+
+        <div class="system-value">
+          SYSTEM PERFORMANCE → NEXT PRODUCTION CYCLE
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="data-row" style="margin-top:25px;">
+
+      <div class="data-label">
+        SYSTEM LOGIC
+      </div>
+
+      <div class="data-value">
+        PRODUCTION → STORAGE → PROCESSING → PREPARATION →
+        CONSUMPTION → WASTE → RECOVERY
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        OUTPUT
+      </div>
+
+      <div class="data-value">
+        SYSTEM MAP / RESOURCE MODEL / FOOD INVENTORY /
+        FAILURE ANALYSIS
+      </div>
+
+    </div>
+
+
+    <div class="data-row">
+
+      <div class="data-label">
+        SOURCE MATERIAL
+      </div>
+
+      <div class="data-value source-links">
+
+        <a
+          href="https://www.deepspacefood.org/"
+          target="_blank"
+          rel="noopener"
+        >
+          DEEP SPACE FOOD CONSORTIUM
+        </a>
+
+        <a
+          href="https://www.deepspacefood.org/members"
+          target="_blank"
+          rel="noopener"
+        >
+          CONSORTIUM / PRIORITY AREAS
+        </a>
+
+        <a
+          href="https://www.deepspacefood.org/collaborate"
+          target="_blank"
+          rel="noopener"
+        >
+          CONSORTIUM / COLLABORATE
+        </a>
+
+      </div>
+
+    </div>
+
+  </article>
+
+</section>
+
+
+<!-- STATUS -->
+
+<div class="launch">
+
+  <div class="launch-label">
+    MCS / RELEASE STATUS
+  </div>
+
+  <h2>
+    COMING SOON
+  </h2>
+
+  <p>
+    A small independent system for studying what we eat,
+    how we experience it, and how food can be understood
+    through data.
+  </p>
+
+</div>
+
+
+<!-- LICENSE -->
+
+<section class="license">
+
+  <div class="license-body">
+
+    <div class="license-title">
+      PROPRIETARY SOFTWARE
+    </div>
+
+    <div class="license-text">
+
+      Product licenses authorize use of Morrow Culinary Systems
+      software according to the license purchased.
+
+      <div class="license-meta">
+
+        <div>
+
+          <span class="meta-label">
+            INDIVIDUAL
+          </span>
+
+          <span class="meta-value">
+            SINGLE PRODUCT
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <span class="meta-label">
+            UNIVERSAL
+          </span>
+
+          <span class="meta-value">
+            MCS PRODUCT LINE
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <span class="meta-label">
+            STATUS
+          </span>
+
+          <span class="meta-value">
+            PROPRIETARY
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 </main>
+
+
+<footer>
+
+  <span>
+    MCS / 001
+  </span>
+
+  <span>
+    NEW YORK / USA
+  </span>
+
+  <span>
+    2026
+  </span>
+
+</footer>
+
+</div>
 
 </body>
 </html>
