@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f1e9">
+<title>Planetary Culinary Lab // Morrow Culinary Systems</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper:#f4f1e9;
+  --panel:#ebe7dc;
+  --ink:#292923;
+  --muted:#77766c;
+  --line:#d2cec1;
+  --red:#bd3529;
+  --red-soft:#ead3cb;
+  --white:#faf9f5;
+  --mono:"IBM Plex Mono",monospace;
+  --sans:"Space Grotesk",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:12px;line-height:1.65}
+a{color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.shell{max-width:1440px;margin:auto;padding:0 30px}
+header{border-bottom:1px solid var(--line)}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 0;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.1em}
+.brand{font-weight:700}
+.status{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.status i{display:block;width:7px;height:7px;background:var(--red);border-radius:50%}
+.hero{padding:54px 0 40px;display:grid;grid-template-columns:1.4fr .6fr;gap:50px;align-items:end}
+.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--red);text-transform:uppercase}
+h1,h2,h3,p{margin-top:0}
+h1{font-family:var(--sans);font-size:clamp(36px,6vw,75px);line-height:.98;letter-spacing:-.065em;font-weight:600;margin:18px 0 24px;max-width:800px}
+h1 span{color:var(--red)}
+.hero p{font-family:var(--sans);font-size:15px;line-height:1.8;max-width:650px;color:#59584f;margin:0}
+.hero-meta{border-left:2px solid var(--red);padding:10px 0 10px 20px}
+.hero-meta strong{display:block;font-size:11px;margin-bottom:7px}
+.hero-meta p{font-family:var(--mono);font-size:10px;line-height:1.9}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding:16px 0}
+nav a{font-size:10px;text-decoration:none;padding:7px 10px;border:1px solid var(--line)}
+nav a:hover{border-color:var(--red);color:var(--red)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:45px 0 17px}
+.section-head h2{font-family:var(--sans);font-size:25px;letter-spacing:-.04em;margin:5px 0 0}
+.section-head p{color:var(--muted);font-size:10px;margin:0}
+.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:18px;align-items:start}
+.panel{border:1px solid var(--line);background:var(--white);min-width:0}
+.panel-title{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:10px;font-weight:700;letter-spacing:.08em}
+.panel-body{padding:17px}
+.field{margin-bottom:20px}
+.field:last-child{margin-bottom:0}
+.field label,.field .label{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:11px}
+.field output{color:var(--red);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--red);cursor:pointer}
+input[type=number],select{width:100%;border:1px solid var(--line);background:var(--paper);padding:10px;color:var(--ink);border-radius:0}
+.scale{display:flex;justify-content:space-between;font-size:9px;color:var(--muted)}
+.planet-list{display:grid;gap:7px}
+.planet{border:1px solid var(--line);padding:11px;background:transparent;text-align:left;color:var(--ink);display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:center}
+.planet .symbol{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--red);font-size:11px}
+.planet strong{display:block;font-size:11px}
+.planet small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.planet.active{border-color:var(--red);background:#f7eee9}
+.btn{padding:12px 15px;border:1px solid var(--ink);background:var(--ink);color:var(--white);font-size:10px;letter-spacing:.04em}
+.btn:hover{background:var(--red);border-color:var(--red)}
+.btn.secondary{background:transparent;color:var(--ink)}
+.btn.secondary:hover{color:var(--red);border-color:var(--red)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.actions .btn{flex:1}
+.note{font-size:10px;color:var(--muted);line-height:1.8}
+.results{display:grid;gap:14px;min-width:0}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.metric{padding:15px;background:var(--panel);border:1px solid var(--line);min-width:0}
+.metric .label{font-size:9px;color:var(--muted);line-height:1.5;min-height:28px}
+.metric .value{font-family:var(--sans);font-size:clamp(24px,3vw,35px);letter-spacing:-.06em;margin:10px 0 4px;overflow-wrap:anywhere}
+.metric .unit{font-size:9px;color:var(--muted)}
+.metric .value.red{color:var(--red)}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chart-wrap{padding:15px;min-width:0}
+.chart-wrap h3{font-size:11px;margin:0 0 4px}
+.chart-wrap p{font-size:9px;color:var(--muted);margin:0 0 15px}
+canvas{display:block;width:100%;height:220px}
+.chart-foot{border-top:1px solid var(--line);padding-top:10px;font-size:9px;color:var(--muted)}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:10px;white-space:nowrap}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:500;color:var(--muted);background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#f6eee7}
+.tag{color:var(--red);font-size:9px}
+.findings{padding:19px}
+.findings h3{font-family:var(--sans);font-size:18px;letter-spacing:-.03em;margin-bottom:10px}
+.findings p{font-size:11px;color:#5e5c52;line-height:1.9;margin-bottom:10px}
+.findings p:last-child{margin-bottom:0}
+.formula{background:var(--panel);padding:14px;margin-top:14px;overflow-wrap:anywhere;font-size:10px;line-height:2}
+.method{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.method article{border-top:2px solid var(--ink);padding:15px 0}
+.method h3{font-size:11px;margin:0 0 9px}
+.method p{font-size:10px;color:var(--muted);line-height:1.9;margin:0}
+footer{margin-top:55px;border-top:1px solid var(--line);padding:24px 0 35px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+footer a{text-decoration:none;color:var(--red)}
+#runStatus{color:var(--red);font-size:10px}
+@media(max-width:950px){
+ .layout{grid-template-columns:1fr}
+ .hero{grid-template-columns:1fr;gap:25px}
+ .hero-meta{max-width:500px}
+}
+@media(max-width:620px){
+ .shell{padding:0 15px}
+ .topline{font-size:9px}
+ .hero{padding:38px 0 30px}
+ .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .chart-grid{grid-template-columns:1fr}
+ .method{grid-template-columns:1fr}
+ .section-head{align-items:start;flex-direction:column}
+ canvas{height:200px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+ <div class="shell">
+  <div class="topline">
+   <span class="brand">MORROW CULINARY SYSTEMS</span>
+   <span class="status"><i></i> COMPUTATIONAL RESEARCH / 001</span>
+  </div>
+  <div class="hero">
+   <div>
+    <div class="eyebrow">Research instrument · Planetary gastronomy</div>
+    <h1>culinary systems<span>.</span><br>under constraint.</h1>
+    <p>A computational study of sensory complexity, ingredient diversity, and planetary environmental feasibility. Change the parameters, generate simulated observations, and inspect how the system responds.</p>
+   </div>
+   <div class="hero-meta">
+    <strong>EXPERIMENT 001 / OPEN MODEL</strong>
+    <p>DOMAIN / CULINARY DATA SCIENCE<br>
+    METHOD / PARAMETERIZED SIMULATION<br>
+    OUTPUT / SYNTHETIC OBSERVATIONS<br>
+    STATUS / REPRODUCIBLE<br>
+    EVIDENCE / SIMULATED, NOT EMPIRICAL</p>
+   </div>
+  </div>
+  <nav aria-label="Research navigation">
+   <a href="#experiment">01 / PARAMETERS</a>
+   <a href="#results">02 / RESULTS</a>
+   <a href="#observations">03 / DATASET</a>
+   <a href="#method">04 / METHODOLOGY</a>
+   <a href="https://axayacatl.github.io/morrowculinarysystems/">MCS / HOME ↗</a>
+  </nav>
+ </div>
+</header>
+
+<main class="shell">
+ <section id="experiment">
+  <div class="section-head">
+   <div>
+    <div class="eyebrow">01 / Independent variables</div>
+    <h2>Configure the experiment</h2>
+   </div>
+   <p>Local computation · No external API</p>
+  </div>
+
+  <div class="layout">
+   <aside class="panel">
+    <div class="panel-title"><span>ENVIRONMENTAL MODEL</span><span>01—04</span></div>
+    <div class="panel-body">
+     <div class="field">
+      <div class="label">Planetary scenario</div>
+      <div class="planet-list">
+       <button type="button" class="planet active" data-planet="temperate" aria-pressed="true">
+        <span class="symbol">T</span><span><strong>Temperate terrestrial</strong><small>Reference conditions</small></span>
+       </button>
+       <button type="button" class="planet" data-planet="ocean" aria-pressed="false">
+        <span class="symbol">O</span><span><strong>Subglacial ocean</strong><small>Cold, limited surface access</small></span>
+       </button>
+       <button type="button" class="planet" data-planet="arid" aria-pressed="false">
+        <span class="symbol">A</span><span><strong>Arid mineral world</strong><small>Water scarcity and heat</small></span>
+       </button>
+       <button type="button" class="planet" data-planet="dense" aria-pressed="false">
+        <span class="symbol">D</span><span><strong>Dense atmosphere</strong><small>High pressure scenario</small></span>
+       </button>
+      </div>
+     </div>
+
+     <div class="field">
+      <label for="ingredients">Ingredient count <output id="ingredientsOut">8</output></label>
+      <input id="ingredients" type="range" min="2" max="20" value="8">
+      <div class="scale"><span>2 / minimal</span><span>20 / extensive</span></div>
+     </div>
+
+     <div class="field">
+      <label for="prep">Preparation methods <output id="prepOut">3</output></label>
+      <input id="prep" type="range" min="1" max="8" value="3">
+      <div class="scale"><span>1</span><span>8</span></div>
+     </div>
+
+     <div class="field">
+      <label for="water">Available water index <output id="waterOut">75</output></label>
+      <input id="water" type="range" min="0" max="100" value="75">
+      <div class="scale"><span>0 / none</span><span>100 / abundant</span></div>
+     </div>
+
+     <div class="field">
+      <label for="energy">Available energy index <output id="energyOut">70</output></label>
+      <input id="energy" type="range" min="0" max="100" value="70">
+      <div class="scale"><span>0 / none</span><span>100 / abundant</span></div>
+     </div>
+
+     <div class="field">
+      <label for="temp">Mean surface temperature <output id="tempOut">18 °C</output></label>
+      <input id="temp" type="range" min="-80" max="80" value="18">
+      <div class="scale"><span>−80 °C</span><span>80 °C</span></div>
+     </div>
+
+     <div class="field">
+      <label for="pressure">Atmospheric pressure <output id="pressureOut">1.0 atm</output></label>
+      <input id="pressure" type="range" min="0" max="100" value="10">
+      <div class="scale"><span>0 atm*</span><span>10 atm</span></div>
+     </div>
+
+     <div class="field">
+      <label for="gravity">Gravity <output id="gravityOut">1.0 g</output></label>
+      <input id="gravity" type="range" min="10" max="200" value="100">
+      <div class="scale"><span>0.1 g</span><span>2.0 g</span></div>
+     </div>
+
+     <div class="field">
+      <label for="radiation">Radiation index <output id="radiationOut">20</output></label>
+      <input id="radiation" type="range" min="0" max="100" value="20">
+      <div class="scale"><span>0 / low</span><span>100 / high</span></div>
+     </div>
+
+     <div class="field">
+      <label for="complexity">Sensory complexity weight <output id="complexityOut">60%</output></label>
+      <input id="complexity" type="range" min="0" max="100" value="60">
+      <div class="scale"><span>Low priority</span><span>High priority</span></div>
+     </div>
+
+     <div class="field">
+      <label for="seed">Random seed</label>
+      <input id="seed" type="number" min="1" max="999999999" value="20261020">
+     </div>
+
+     <div class="actions">
+      <button type="button" class="btn" id="run">RUN EXPERIMENT ↗</button>
+      <button type="button" class="btn secondary" id="reset">RESET</button>
+     </div>
+     <p class="note" style="margin:15px 0 0">*Near-zero atmospheric pressure is not equivalent to a viable cultivation environment. Environmental indices are illustrative model inputs, not validated planetary habitability measurements.</p>
+    </div>
+   </aside>
+
+   <div class="results" id="results">
+    <div class="panel">
+     <div class="panel-title"><span>SIMULATION OUTPUT</span><span id="runStatus" aria-live="polite">READY</span></div>
+     <div class="panel-body">
+      <div class="metrics">
+       <div class="metric"><div class="label">SENSORY COMPLEXITY</div><div class="value red" id="mComplexity">—</div><div class="unit">0–100 / model index</div></div>
+       <div class="metric"><div class="label">ENVIRONMENTAL FEASIBILITY</div><div class="value" id="mFeasibility">—</div><div class="unit">0–100 / constraint score</div></div>
+       <div class="metric"><div class="label">INGREDIENT DIVERSITY</div><div class="value" id="mDiversity">—</div><div class="unit">category coverage index</div></div>
+       <div class="metric"><div class="label">SYSTEM OBJECTIVE</div><div class="value" id="mObjective">—</div><div class="unit">weighted synthetic score</div></div>
+      </div>
+     </div>
+    </div>
+
+    <div class="chart-grid">
+     <div class="panel chart-wrap">
+      <h3>01 / Complexity response</h3>
+      <p>Ingredient count versus modeled sensory complexity</p>
+      <canvas id="complexityChart" role="img" aria-label="Line chart of modeled sensory complexity as ingredient count increases"></canvas>
+      <div class="chart-foot">Diminishing returns and interaction penalties are assumed by design.</div>
+     </div>
+     <div class="panel chart-wrap">
+      <h3>02 / Environmental constraints</h3>
+      <p>Relative suitability across modeled resource dimensions</p>
+      <canvas id="environmentChart" role="img" aria-label="Bar chart of modeled environmental suitability factors"></canvas>
+      <div class="chart-foot">Higher scores indicate fewer modeled constraints.</div>
+     </div>
+     <div class="panel chart-wrap">
+      <h3>03 / Sensory profile</h3>
+      <p>Illustrative normalized sensory feature distribution</p>
+      <canvas id="sensoryChart" role="img" aria-label="Bar chart of synthetic sensory feature values"></canvas>
+      <div class="chart-foot">Not measured from actual food or human tasting.</div>
+     </div>
+     <div class="panel chart-wrap">
+      <h3>04 / Complexity and feasibility</h3>
+      <p>Parameter sweep across ingredient counts</p>
+      <canvas id="tradeoffChart" role="img" aria-label="Scatter plot of modeled complexity against environmental feasibility"></canvas>
+      <div class="chart-foot">A candidate is not empirically optimal merely because its modeled score is high.</div>
+     </div>
+    </div>
+
+    <div class="panel">
+     <div class="panel-title"><span>MODEL INTERPRETATION</span><span>GENERATED REPORT</span></div>
+     <div class="findings" aria-live="polite">
+      <h3 id="findingTitle">Awaiting simulation.</h3>
+      <p id="findingText">Configure the environment and run the experiment to calculate the model outputs.</p>
+      <p id="findingCaution" class="note">This experiment generates synthetic observations. It does not establish empirical sensory relationships or prove that a fictional planet can support food production.</p>
+      <div class="formula" id="formula">MODEL / NOT YET EXECUTED</div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section id="observations">
+  <div class="section-head">
+   <div>
+    <div class="eyebrow">02 / Experimental records</div>
+    <h2>Observation dataset</h2>
+   </div>
+   <p id="rowCount">0 records</p>
+  </div>
+  <div class="panel">
+   <div class="panel-title">
+    <span>PARAMETER SWEEP / SYNTHETIC DATA</span>
+    <div class="actions" style="margin:0">
+     <button class="btn secondary" type="button" id="exportCsv">EXPORT CSV</button>
+     <button class="btn secondary" type="button" id="exportJson">EXPORT JSON</button>
+    </div>
+   </div>
+   <div class="table-wrap">
+    <table>
+     <thead>
+      <tr>
+       <th>RUN</th><th>SCENARIO</th><th>INGREDIENTS</th><th>METHODS</th><th>COMPLEXITY</th><th>FEASIBILITY</th><th>DIVERSITY</th><th>OBJECTIVE</th>
+      </tr>
+     </thead>
+     <tbody id="dataRows">
+      <tr><td colspan="8">No observations. Run the experiment to generate records.</td></tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </section>
+
+ <section id="method">
+  <div class="section-head">
+   <div>
+    <div class="eyebrow">03 / Model documentation</div>
+    <h2>What is being quantified?</h2>
+   </div>
+  </div>
+  <div class="method">
+   <article>
+    <h3>01 / Sensory complexity</h3>
+    <p>A constructed index combines saturating effects of ingredient count and preparation methods with a synthetic interaction penalty. It is a mathematical proxy, not a validated psychometric measure.</p>
+   </article>
+   <article>
+    <h3>02 / Environmental feasibility</h3>
+    <p>A weighted constraint score evaluates temperature, pressure, gravity, water, energy, and radiation against broad illustrative cultivation assumptions. It does not simulate complete planetary biology or atmospheric chemistry.</p>
+   </article>
+   <article>
+    <h3>03 / Diversity and objective</h3>
+    <p>Diversity is estimated from assumed category coverage. The objective combines complexity and feasibility according to the selected weight. These are exploratory modeling choices to be tested, not scientific laws.</p>
+   </article>
+  </div>
+  <div class="panel" style="margin-top:20px">
+   <div class="panel-title"><span>RESEARCH LIMITATIONS</span><span>READ BEFORE INTERPRETING</span></div>
+   <div class="findings">
+    <p>All observations generated here are synthetic and determined by explicit formulas and a reproducible random seed. No actual tasting panel, measured aroma dataset, validated crop model, or astronomical observation is used.</p>
+    <p>For empirical research, replace the synthetic sensory generator with documented ingredient chemistry or structured tasting observations. Replace the illustrative feasibility score with crop-specific tolerance data, pressure and atmospheric models, radiation shielding assumptions, and resource budgets. Preserve source citations, units, uncertainty, and missing values.</p>
+    <p>The purpose of this companion is to explore a computational research design and expose assumptions—not to present fabricated results as scientific findings.</p>
+   </div>
+  </div>
+ </section>
+</main>
+
+<footer class="shell">
+ <span>MORROW CULINARY SYSTEMS / RESEARCH SERIES 001</span>
+ <span><a href="https://axaxayacatl.github.io/morrowculinarysystems/">RETURN TO MCS ↗</a></span>
+ <span>LOCAL COMPUTATION / SYNTHETIC DATA / V1.0</span>
+</footer>
+
+<script>
+(() => {
+"use strict";
+
+const $ = id => document.getElementById(id);
+const inputs = ["ingredients","prep","water","energy","temp","pressure","gravity","radiation","complexity"];
+const initial = {
+ ingredients:8,prep:3,water:75,energy:70,temp:18,
+ pressure:10,gravity:100,radiation:20,complexity:60,seed:20261020
+};
+
+const planets = {
+ temperate:{name:"Temperate terrestrial",water:75,energy:70,temp:18,pressure:10,gravity:100,radiation:20},
+ ocean:{name:"Subglacial ocean",water:90,energy:35,temp:-20,pressure:45,gravity:110,radiation:30},
+ arid:{name:"Arid mineral world",water:12,energy:65,temp:48,pressure:4,gravity:85,radiation:75},
+ dense:{name:"Dense atmosphere",water:60,energy:50,temp:35,pressure:75,gravity:140,radiation:15}
+};
+
+let selectedPlanet = "temperate";
+let observations = [];
+let latest = null;
+let runNumber = 0;
+
+function read(){
+ const o = {};
+ inputs.forEach(id => o[id] = Number($(id).value));
+ o.seed = Math.max(1,Math.min(999999999,Math.floor(Number($("seed").value)||1)));
+ return o;
+}
+
+function updateLabels(){
+ const v = read();
+ $("ingredientsOut").textContent = v.ingredients;
+ $("prepOut").textContent = v.prep;
+ $("waterOut").textContent = v.water;
+ $("energyOut").textContent = v.energy;
+ $("tempOut").textContent = v.temp + " °C";
+ $("pressureOut").textContent = (v.pressure/10).toFixed(1) + " atm";
+ $("gravityOut").textContent = (v.gravity/100).toFixed(2) + " g";
+ $("radiationOut").textContent = v.radiation;
+ $("complexityOut").textContent = v.complexity + "%";
+}
+
+function rng(seed){
+ let s = seed >>> 0;
+ return () => {
+  s += 0x6D2B79F5;
+  let t = s;
+  t = Math.imul(t ^ t >>> 15,t | 1);
+  t ^= t + Math.imul(t ^ t >>> 7,t | 61);
+  return ((t ^ t >>> 14) >>> 0) / 4294967296;
+ };
+}
+
+const clamp = (x,min=0,max=100) => Math.max(min,Math.min(max,x));
+const round = x => Math.round(x*10)/10;
+const mean = a => a.reduce((s,x)=>s+x,0)/Math.max(1,a.length);
+
+function environmentalScores(v){
+ const temp = clamp(100-Math.abs(v.temp-22)*1.5);
+ const pressure = clamp(100-Math.abs(v.pressure/10-1)*18);
+ const gravity = clamp(100-Math.abs(v.gravity/100-1)*35);
+ const water = clamp(v.water);
+ const energy = clamp(v.energy);
+ const radiation = clamp(100-v.radiation*0.9);
+ const factors = [
+  {name:"Temperature",score:temp,weight:.22},
+  {name:"Pressure",score:pressure,weight:.12},
+  {name:"Gravity",score:gravity,weight:.08},
+  {name:"Water",score:water,weight:.25},
+  {name:"Energy",score:energy,weight:.20},
+  {name:"Radiation",score:radiation,weight:.13}
+ ];
+ const score = factors.reduce((s,f)=>s+f.score*f.weight,0);
+ return {score,factors};
+}
+
+function model(v,seed){
+ const random = rng(seed);
+ const env = environmentalScores(v);
+ const n = v.ingredients;
+ const methods = v.prep;
+
+ // Deliberately illustrative response functions, not fitted to observations.
+ const ingredientContribution = 1-Math.exp(-n/7);
+ const methodContribution = 1-Math.exp(-methods/3.5);
+ const interactionPenalty = Math.max(0,n-7)*Math.max(0,methods-3)*.36;
+ const noise = (random()-.5)*5;
+ const complexity = clamp(
+  15 + 48*ingredientContribution + 24*methodContribution
+  - interactionPenalty + noise
+ );
+ const diversity = clamp(
+  100*(1-Math.exp(-n/6))*(.72+.28*random())
+ );
+ const compatibility = clamp(
+  92 - Math.max(0,n-6)*2.1
+  - Math.max(0,methods-3)*1.5 + (random()-.5)*10
+ );
+ const weight = v.complexity/100;
+ const objective = weight*complexity + (1-weight)*env.score;
+
+ const sensory = [
+  {name:"Aroma",value:clamp(22+n*2.1+random()*14)},
+  {name:"Texture",value:clamp(20+methods*7+random()*12)},
+  {name:"Flavor breadth",value:clamp(18+n*2.8+random()*12)},
+  {name:"Balance",value:compatibility},
+  {name:"Coherence",value:clamp(100-interactionPenalty*1.5+random()*8)}
+ ];
+
+ return {
+  seed,scenario:planets[selectedPlanet].name,
+  planetKey:selectedPlanet,
+  ingredients:n,methods,
+  water:v.water,energy:v.energy,tempC:v.temp,
+  pressureAtm:round(v.pressure/10),
+  gravityG:round(v.gravity/100),
+  radiation:v.radiation,
+  complexity:round(complexity),
+  feasibility:round(env.score),
+  diversity:round(diversity),
+  compatibility:round(compatibility),
+  objective:round(objective),
+  sensory,
+  factors:env.factors
+ };
+}
+
+function setMetric(id,value){$(id).textContent=Number(value).toFixed(1)}
+
+function chart(id,draw){
+ const canvas=$(id);
+ const rect=canvas.getBoundingClientRect();
+ const w=Math.max(250,rect.width||300);
+ const h=220;
+ const dpr=window.devicePixelRatio||1;
+ canvas.width=w*dpr; canvas.height=h*dpr;
+ const ctx=canvas.getContext("2d");
+ ctx.scale(dpr,dpr);
+ ctx.clearRect(0,0,w,h);
+ draw(ctx,w,h);
+}
+
+const ink="#292923", muted="#77766c", line="#d2cec1", red="#bd3529", pale="#ead3cb";
+
+function axes(ctx,w,h,xLabel,yLabel){
+ ctx.font='9px "IBM Plex Mono", monospace';
+ ctx.fillStyle=muted;
+ ctx.strokeStyle=line;
+ ctx.lineWidth=1;
+ const L=35,R=10,T=12,B=31;
+ for(let i=0;i<=4;i++){
+  const y=T+(h-T-B)*i/4;
+  ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(w-R,y);ctx.stroke();
+  ctx.textAlign="right";ctx.fillText(String(100-i*25),L-6,y+3);
+ }
+ ctx.textAlign="center";
+ ctx.fillText(xLabel,(L+w-R)/2,h-5);
+ ctx.save();ctx.translate(9,(h-B+T)/2);ctx.rotate(-Math.PI/2);
+ ctx.fillText(yLabel,0,0);ctx.restore();
+ return {L,R,T,B,pw:w-L-R,ph:h-T-B};
+}
+
+function drawComplexity(){
+ chart("complexityChart",(ctx,w,h)=>{
+  const a=axes(ctx,w,h,"INGREDIENT COUNT","INDEX");
+  const v=read();
+  ctx.strokeStyle=red;ctx.lineWidth=2;ctx.beginPath();
+  for(let n=2;n<=20;n++){
+   const m=model({...v,ingredients:n},v.seed+n*17);
+   const x=a.L+(n-2)/18*a.pw;
+   const y=a.T+(100-m.complexity)/100*a.ph;
+   if(n===2)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  const yNow=a.T+(100-latest.complexity)/100*a.ph;
+  const xNow=a.L+(v.ingredients-2)/18*a.pw;
+  ctx.fillStyle=red;ctx.beginPath();ctx.arc(xNow,yNow,4,0,Math.PI*2);ctx.fill();
+ });
+}
+
+function drawEnvironment(){
+ chart("environmentChart",(ctx,w,h)=>{
+  const fs=latest.factors;
+  const L=95,R=10,T=8,B=8;
+  const rowH=(h-T-B)/fs.length;
+  ctx.font='9px "IBM Plex Mono", monospace';
+  fs.forEach((f,i)=>{
+   const y=T+i*rowH;
+   ctx.fillStyle=muted;ctx.textAlign="right";
+   ctx.fillText(f.name,L-8,y+rowH*.55);
+   ctx.fillStyle=line;ctx.fillRect(L,y+rowH*.25,w-L-R,rowH*.4);
+   ctx.fillStyle=red;ctx.fillRect(L,y+rowH*.25,(w-L-R)*f.score/100,rowH*.4);
+   ctx.fillStyle=ink;ctx.textAlign="right";
+   ctx.fillText(Math.round(f.score),w-R,y+rowH*.55);
+  });
+ });
+}
+
+function drawSensory(){
+ chart("sensoryChart",(ctx,w,h)=>{
+  const items=latest.sensory;
+  const L=12,R=8,T=12,B=40;
+  const pw=w-L-R, ph=h-T-B, slot=pw/items.length;
+  ctx.strokeStyle=line;ctx.lineWidth=1;
+  for(let k=0;k<=4;k++){
+   const y=T+ph*k/4;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(w-R,y);ctx.stroke();
+  }
+  items.forEach((it,i)=>{
+   const bh=ph*it.value/100;
+   const x=L+i*slot+slot*.2;
+   ctx.fillStyle=i===3?red:pale;
+   ctx.fillRect(x,T+ph-bh,slot*.6,bh);
+   ctx.fillStyle=ink;ctx.font='9px "IBM Plex Mono", monospace';ctx.textAlign="center";
+   ctx.fillText(Math.round(it.value),x+slot*.3,T+ph-bh-5);
+   const words=it.name.split(" ");
+   words.forEach((word,j)=>ctx.fillText(word,x+slot*.3,h-B+12*j));
+  });
+ });
+}
+
+function drawTradeoff(){
+ chart("tradeoffChart",(ctx,w,h)=>{
+  const a=axes(ctx,w,h,"FEASIBILITY","COMPLEXITY");
+  const v=read();
+  for(let n=2;n<=20;n++){
+   const m=model({...v,ingredients:n},v.seed+n*31);
+   const x=a.L+m.feasibility/100*a.pw;
+   const y=a.T+(100-m.complexity)/100*a.ph;
+   ctx.fillStyle=n===v.ingredients?red:pale;
+   ctx.beginPath();ctx.arc(x,y,n===v.ingredients?5:3,0,Math.PI*2);ctx.fill();
+  }
+ });
+}
+
+function renderCharts(){
+ if(!latest)return;
+ drawComplexity();
+ drawEnvironment();
+ drawSensory();
+ drawTradeoff();
+}
+
+function renderReport(){
+ const r=latest;
+ setMetric("mComplexity",r.complexity);
+ setMetric("mFeasibility",r.feasibility);
+ setMetric("mDiversity",r.diversity);
+ setMetric("mObjective",r.objective);
+
+ $("findingTitle").textContent =
+  r.objective>=70?"High modeled objective under current assumptions.":
+  r.objective>=45?"Intermediate modeled objective under current assumptions.":
+  "Low modeled objective under current assumptions.";
+
+ const strongest=[...r.factors].sort((a,b)=>b.score-a.score)[0];
+ const weakest=[...r.factors].sort((a,b)=>a.score-b.score)[0];
+
+ $("findingText").textContent =
+  r.scenario+" produced a sensory complexity index of "+r.complexity+
+  ", an environmental constraint score of "+r.feasibility+
+  ", and a category-diversity proxy of "+r.diversity+
+  ". The strongest modeled environmental dimension was "+strongest.name+
+  " ("+round(strongest.score)+"); the weakest was "+weakest.name+
+  " ("+round(weakest.score)+"). The weighted objective was "+r.objective+
+  " with complexity weighted at "+$("complexity").value+"%.";
+
+ $("formula").textContent =
+  "OBJECTIVE = w × sensory complexity + (1 − w) × environmental feasibility"+
+  "\n w = "+($("complexity").value/100).toFixed(2)+
+  "\n COMPLEXITY = saturating ingredient contribution + saturating method contribution − interaction penalty + seeded noise"+
+  "\n FEASIBILITY = weighted environmental constraint score"+
+  "\n SEED = "+r.seed+
+  "\n INTERPRETATION = exploratory synthetic model; no empirical validation";
+
+ $("runStatus").textContent="SIMULATION COMPLETE";
+}
+
+function renderTable(){
+ $("rowCount").textContent=observations.length+" records";
+ const body=$("dataRows");
+ body.replaceChildren();
+ if(!observations.length){
+  const tr=document.createElement("tr"),td=document.createElement("td");
+  td.colSpan=8;td.textContent="No observations.";
+  tr.appendChild(td);body.appendChild(tr);return;
+ }
+ observations.slice(-100).reverse().forEach(r=>{
+  const tr=document.createElement("tr");
+  const values=[
+   r.run,r.scenario,r.ingredients,r.methods,
+   r.complexity,r.feasibility,r.diversity,r.objective
+  ];
+  values.forEach((value,i)=>{
+   const td=document.createElement("td");
+   td.textContent=value;
+   if(i===7)td.className="tag";
+   tr.appendChild(td);
+  });
+  body.appendChild(tr);
+ });
+}
+
+function runExperiment(){
+ updateLabels();
+ const v=read();
+ latest=model(v,v.seed);
+ runNumber++;
+ observations.push({
+  run:runNumber,...latest
+ });
+ renderReport();
+ renderCharts();
+ renderTable();
+}
+
+function download(name,content,type){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download=name;
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function csv(rows){
+ if(!rows.length)return "";
+ const keys=Object.keys(rows[0]);
+ const quote=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+ return [keys.map(quote).join(","),...rows.map(r=>keys.map(k=>
+  quote(Array.isArray(r[k])||typeof r[k]==="object"&&r[k]!==null?
+  JSON.stringify(r[k]):r[k])).join(","))].join("\r\n");
+}
+
+inputs.forEach(id=>{
+ $(id).addEventListener("input",updateLabels);
+});
+
+document.querySelectorAll("[data-planet]").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  selectedPlanet=btn.dataset.planet;
+  document.querySelectorAll("[data-planet]").forEach(b=>{
+   const active=b===btn;
+   b.classList.toggle("active",active);
+   b.setAttribute("aria-pressed",String(active));
+  });
+  const p=planets[selectedPlanet];
+  ["water","energy","temp","pressure","gravity","radiation"].forEach(k=>$(k).value=p[k]);
+  updateLabels();
+ });
+});
+
+$("run").addEventListener("click",runExperiment);
+
+$("reset").addEventListener("click",()=>{
+ Object.entries(initial).forEach(([k,v])=>$(k).value=v);
+ selectedPlanet="temperate";
+ document.querySelectorAll("[data-planet]").forEach(b=>{
+  const active=b.dataset.planet===selectedPlanet;
+  b.classList.toggle("active",active);
+  b.setAttribute("aria-pressed",String(active));
+ });
+ observations=[];
+ runNumber=0;
+ latest=null;
+ $("runStatus").textContent="READY";
+ ["mComplexity","mFeasibility","mDiversity","mObjective"].forEach(id=>$(id).textContent="—");
+ $("findingTitle").textContent="Awaiting simulation.";
+ $("findingText").textContent="Configure the environment and run the experiment to calculate the model outputs.";
+ $("formula").textContent="MODEL / NOT YET EXECUTED";
+ ["complexityChart","environmentChart","sensoryChart","tradeoffChart"].forEach(id=>{
+  const c=$(id);c.getContext("2d").clearRect(0,0,c.width,c.height);
+ });
+ updateLabels();
+ renderTable();
+});
+
+$("exportCsv").addEventListener("click",()=>{
+ if(!observations.length){$("runStatus").textContent="NO DATA TO EXPORT";return;}
+ download("mcs-planetary-culinary-observations.csv",csv(observations),"text/csv;charset=utf-8");
+ $("runStatus").textContent="CSV EXPORTED";
+});
+
+$("exportJson").addEventListener("click",()=>{
+ if(!observations.length){$("runStatus").textContent="NO DATA TO EXPORT";return;}
+ const payload={
+  study:"Planetary Culinary Systems / Experiment 001",
+  dataType:"synthetic simulation",
+  generatedAt:new Date().toISOString(),
+  modelNote:"Illustrative equations; outputs are not empirical findings.",
+  observations
+ };
+ download("mcs-planetary-culinary-observations.json",JSON.stringify(payload,null,2),"application/json");
+ $("runStatus").textContent="JSON EXPORTED";
+});
+
+let resizeFrame;
+window.addEventListener("resize",()=>{
+ if(!latest)return;
+ cancelAnimationFrame(resizeFrame);
+ resizeFrame=requestAnimationFrame(renderCharts);
+});
+
+updateLabels();
+runExperiment();
+})();
+</script>
+</body>
+</html>
